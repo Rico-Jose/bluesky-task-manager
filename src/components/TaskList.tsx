@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
 const TaskList = (props: any) => {
@@ -17,7 +18,9 @@ const TaskList = (props: any) => {
           <h2>Task List</h2>
         </div>
         <div className="col-6">
-          <button className="btn btn-primary">Add Task</button>
+          <Link to="/add">
+            <button className="btn btn-primary">Add Task</button>
+          </Link>
         </div>
       </div>
       {renderTaskList}
