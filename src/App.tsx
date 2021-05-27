@@ -23,7 +23,7 @@ function App() {
 
   // Add task
   const addTaskHandler = (task: any) => {
-    setTasks([...tasks, task]);
+    setTasks([...tasks, { id: tasks.length + 1, ...task }]);
   };
 
   // Run the hook on mount
@@ -32,15 +32,16 @@ function App() {
     retrieveTasks();
   }, []);
 
-  // Run the hook whenever users change
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
-
   // Run the hook whenever tasks change
   useEffect(() => {
     console.log(tasks);
+    console.log(tasks.length);
   }, [tasks]);
+
+  // Run the hook whenever users change
+  /* useEffect(() => {
+    console.log(users);
+  }, [users]); */
 
   return (
     <div className="App">

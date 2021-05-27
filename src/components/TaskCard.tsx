@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTimes, FaRegCheckCircle } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 
 const TaskCard = (props: any) => {
   // Restructure
