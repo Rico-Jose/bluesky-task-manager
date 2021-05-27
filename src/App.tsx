@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
+import Header from './components/Header';
 
 function App() {
   const retrieveUsers = () => {
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Task Manager</h2>
+      <Header />
     </div>
   );
 }
