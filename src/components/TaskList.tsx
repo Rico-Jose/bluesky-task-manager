@@ -12,7 +12,14 @@ const TaskList = (props: any) => {
 
   return (
     <main>
-      <h2>Task List</h2>
+      <div className="row">
+        <div className="col-6">
+          <h2>Task List</h2>
+        </div>
+        <div className="col-6">
+          <button className="btn btn-primary">Add Task</button>
+        </div>
+      </div>
       {renderTaskList}
     </main>
   );
