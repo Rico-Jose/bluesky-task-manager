@@ -24,7 +24,8 @@ function App() {
 
   // Add task
   const addTaskHandler = (task: any) => {
-    setTasks([...tasks, { id: tasks.length + 1, ...task }]);
+    const temp = parseInt(tasks[tasks.length - 1].id) + 1;
+    setTasks([...tasks, { id: temp.toString(), ...task }]);
   };
 
   // Delete task
