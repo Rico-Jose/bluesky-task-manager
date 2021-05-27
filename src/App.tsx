@@ -55,11 +55,30 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <div className="container">
-        <AddTask addTaskHandler={addTaskHandler} />
-        <TaskList tasks={tasks} getTaskId={deleteTaskHandler} />
-      </div>
+      <Router>
+        <Header />
+        <div className="container">
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(props) => (
+                <TaskList
+                  {...props}
+                  tasks={tasks}
+                  getTaskId={deleteTaskHandler}
+                />
+              )}
+            />
+            <Route
+              path="/add"
+              render={(props) => (
+                <AddTask {...props} addTaskHandler={addTaskHandler} />
+              )}
+            />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
