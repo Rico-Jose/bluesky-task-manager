@@ -26,6 +26,15 @@ function App() {
     setTasks([...tasks, { id: tasks.length + 1, ...task }]);
   };
 
+  // Delete task
+  const deleteTaskHandler = (id: any) => {
+    const newTaskList = tasks.filter((task: any) => {
+      return task.id !== id;
+    });
+
+    setTasks(newTaskList);
+  };
+
   // Run the hook on mount
   useEffect(() => {
     retrieveUsers();
@@ -48,7 +57,7 @@ function App() {
       <Header />
       <div className="container">
         <AddTask addTaskHandler={addTaskHandler} />
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} getTaskId={deleteTaskHandler} />
       </div>
     </div>
   );
