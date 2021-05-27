@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header>
-      <h2 className="text-center">BlueSky Task Manager</h2>
+      <h1 className="text-center">BlueSky Task Manager</h1>
     </header>
   );
 };
