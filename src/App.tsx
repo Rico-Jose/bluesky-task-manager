@@ -21,6 +21,11 @@ function App() {
   const [users, setUsers] = useState<any>([]);
   const [tasks, setTasks] = useState<any>([]);
 
+  // Add task
+  const addTaskHandler = (task: any) => {
+    setTasks([...tasks, task]);
+  };
+
   // Run the hook on mount
   useEffect(() => {
     retrieveUsers();
@@ -41,7 +46,7 @@ function App() {
     <div className="App">
       <Header />
       <div className="container">
-        <AddTask />
+        <AddTask addTaskHandler={addTaskHandler} />
         <TaskList tasks={tasks} />
       </div>
     </div>
