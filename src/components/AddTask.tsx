@@ -27,6 +27,9 @@ const AddTask = (props: any) => {
     setName('');
     setUser('');
     setIsComplete(false);
+
+    // Go to back the home page
+    props.history.push('/');
   };
 
   return (
