@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@types/faker": "^4.1.12",
+    "@types/react-router-dom": "^5.1.7",
     "faker": "^4.1.0",
     "miragejs": "^0.1.40"
   }
