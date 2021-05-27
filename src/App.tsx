@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
+import TaskList from './components/TaskList';
 
 function App() {
   const retrieveUsers = () => {
@@ -37,6 +38,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <TaskList tasks={tasks} />
     </div>
   );
 }
