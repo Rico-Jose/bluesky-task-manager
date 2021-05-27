@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
+import AddTask from './components/AddTask';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
     <div className="App">
       <Header />
       <div className="container">
+        <AddTask />
         <TaskList tasks={tasks} />
       </div>
     </div>
