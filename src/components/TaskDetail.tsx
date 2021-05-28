@@ -1,12 +1,16 @@
 import React from 'react';
 
-const TaskDetail = () => {
+const TaskDetail = (props: any) => {
+  const { name, user, isComplete } = props.location.state.task;
+
   return (
     <main>
       <div className="card">
         <div className="card-body">
-          <h1 className="card-title">Do something</h1>
-          <p className="card-text">Rico</p>
+          <h1 className="card-title">{name}</h1>
+          <p className="card-text">{user}</p>
+          {isComplete && <p className="card-text">Completed</p>}
+          {!isComplete && <p className="card-text">Not Completed</p>}
         </div>
       </div>
       <div>

@@ -25,7 +25,8 @@ function App() {
 
   // Add task
   const addTaskHandler = (task: any) => {
-    const temp = parseInt(tasks[tasks.length - 1].id) + 1;
+    const temp =
+      tasks.length > 0 ? parseInt(tasks[tasks.length - 1].id) + 1 : 1;
     setTasks([...tasks, { id: temp.toString(), ...task }]);
   };
 
@@ -78,7 +79,7 @@ function App() {
                 <AddTask {...props} addTaskHandler={addTaskHandler} />
               )}
             />
-            <Route path="/task" component={TaskDetail} />
+            <Route path="/task/:id" component={TaskDetail} />
           </Switch>
         </div>
       </Router>

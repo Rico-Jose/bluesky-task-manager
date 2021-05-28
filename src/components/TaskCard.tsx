@@ -11,7 +11,7 @@ const TaskCard = (props: any) => {
       <div className="card-body">
         <div className="row">
           <div className="col-11">
-            <Link to={`/task/${id}`}>
+            <Link to={{ pathname: `/task/${id}`, state: { task: props.task } }}>
               <h5 className="card-title">{name}</h5>
               <p className="card-text">{user}</p>
             </Link>
