@@ -38,7 +38,8 @@ function App() {
   };
 
   // Delete task
-  const deleteTaskHandler = (id: any) => {
+  const deleteTaskHandler = async (id: any) => {
+    await axios.delete(`api/todo/${id}/delete`);
     const newTaskList = tasks.filter((task: any) => {
       return task.id !== id;
     });
