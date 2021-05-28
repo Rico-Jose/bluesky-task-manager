@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
+import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                 <AddTask {...props} addTaskHandler={addTaskHandler} />
               )}
             />
+            <Route path="/task" component={TaskDetail} />
           </Switch>
         </div>
       </Router>
