@@ -30,7 +30,7 @@ function App() {
 
   // Add task
   const addTaskHandler = async (task: any) => {
-    const response = await axios.post('/api/todo/create', { task });
+    const response = await axios.post('api/todo/create', { task });
 
     setTasks([
       ...tasks,
@@ -39,7 +39,13 @@ function App() {
   };
 
   // Edit task
-  const editTaskHandler = async (task: any) => {};
+  const editTaskHandler = (task: any) => {
+    setTasks(
+      tasks.map((t: any) => {
+        return t.id === task.id ? { ...task } : t;
+      })
+    );
+  };
 
   // Delete task
   const deleteTaskHandler = async (id: any) => {

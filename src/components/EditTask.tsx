@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
 const EditTask = (props: any) => {
-  const [name, setName] = useState('');
-  const [user, setUser] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
+  const [name, setName] = useState(props.location.state.task.name);
+  const [user, setUser] = useState(props.location.state.task.user);
+  const [isComplete, setIsComplete] = useState(
+    props.location.state.task.isComplete
+  );
 
   const update = (e: any) => {
     // Don't refresh page
@@ -15,13 +17,14 @@ const EditTask = (props: any) => {
     }
 
     const task = {
+      id: props.location.state.task.id,
       name: name,
       user: user,
       isComplete: isComplete,
     };
 
     // Pass data to parent component
-    props.addTaskHandler(task);
+    props.editTaskHandler(task);
 
     // Reset values
     setName('');
@@ -68,7 +71,7 @@ const EditTask = (props: any) => {
           <label className="form-check-label">Completed</label>
         </div>
         <button type="submit" className="btn btn-primary m-3">
-          Add
+          Update
         </button>
       </form>
     </>
