@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
+import EditTask from './components/EditTask';
 import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,6 +37,9 @@ function App() {
       { id: response.data.todo.id, ...response.data.todo.task },
     ]);
   };
+
+  // Edit task
+  const editTaskHandler = async (task: any) => {};
 
   // Delete task
   const deleteTaskHandler = async (id: any) => {
@@ -84,6 +88,12 @@ function App() {
               path="/add"
               render={(props) => (
                 <AddTask {...props} addTaskHandler={addTaskHandler} />
+              )}
+            />
+            <Route
+              path="/edit"
+              render={(props) => (
+                <EditTask {...props} editTaskHandler={editTaskHandler} />
               )}
             />
             <Route path="/task/:id" component={TaskDetail} />

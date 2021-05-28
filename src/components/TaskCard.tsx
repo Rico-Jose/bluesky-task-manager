@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaEdit } from 'react-icons/fa';
 
 const TaskCard = (props: any) => {
   // Restructure
@@ -19,6 +19,9 @@ const TaskCard = (props: any) => {
             {!isComplete && <p className="card-text">Not Completed</p>}
           </div>
           <div className="col-1">
+            <Link to={{ pathname: `/edit`, state: { task: props.task } }}>
+              <FaEdit />
+            </Link>
             <FaTimes
               style={{ color: 'red' }}
               onClick={() => props.getTaskId(id)}
