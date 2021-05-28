@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
 const TaskCard = (props: any) => {
@@ -10,8 +11,10 @@ const TaskCard = (props: any) => {
       <div className="card-body">
         <div className="row">
           <div className="col-11">
-            <h5 className="card-title">{name}</h5>
-            <p className="card-text">{user}</p>
+            <Link to={`/task/${id}`}>
+              <h5 className="card-title">{name}</h5>
+              <p className="card-text">{user}</p>
+            </Link>
             {isComplete && <p className="card-text">Completed</p>}
             {!isComplete && <p className="card-text">Not Completed</p>}
           </div>
