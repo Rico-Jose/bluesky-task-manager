@@ -8,16 +8,20 @@ import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  // Retrieve Users
   const retrieveUsers = () => {
     axios.get('api/users').then((res) => {
       setUsers([...users, ...res.data.users]);
     });
   };
 
-  const retrieveTasks = () => {
-    axios.get('api/todos').then((res) => {
+  // Retrieve ToDos
+  const retrieveTasks = async () => {
+    const response = await axios.get('api/todos');
+    return response.data.todos;
+    /* axios.get('api/todos').then((res) => {
       setTasks([...tasks, ...res.data.todos]);
-    });
+    }); */
   };
 
   const [users, setUsers] = useState<any>([]);
@@ -41,8 +45,12 @@ function App() {
 
   // Run the hook on mount
   useEffect(() => {
-    retrieveUsers();
-    retrieveTasks();
+    const getAllTasks = async () => {
+      const allTasks = await retrieveTasks();
+      if (allTasks) setTasks(allTasks);
+    };
+
+    getAllTasks();
   }, []);
 
   // Run the hook whenever tasks change
@@ -50,11 +58,6 @@ function App() {
     console.log(tasks);
     console.log(tasks.length);
   }, [tasks]);
-
-  // Run the hook whenever users change
-  /* useEffect(() => {
-    console.log(users);
-  }, [users]); */
 
   return (
     <div className="App">
