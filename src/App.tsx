@@ -29,16 +29,12 @@ function App() {
 
   // Add task
   const addTaskHandler = async (task: any) => {
-    const temp =
-      tasks.length > 0 ? parseInt(tasks[tasks.length - 1].id) + 1 : 1;
+    const response = await axios.post('/api/todo/create', { task });
 
-    const request = {
-      id: temp.toString(),
-      ...task,
-    };
-
-    const response = await axios.post('/api/todo/create', { request });
-    setTasks([...tasks, response]);
+    setTasks([
+      ...tasks,
+      { id: response.data.todo.id, ...response.data.todo.task },
+    ]);
   };
 
   // Delete task
