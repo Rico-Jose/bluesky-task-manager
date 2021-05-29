@@ -12,6 +12,7 @@ function App() {
   const [users, setUsers] = useState<any>([]);
   const [tasks, setTasks] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   // Retrieve users from the server
   const retrieveUsers = () => {
@@ -56,7 +57,18 @@ function App() {
   };
 
   const searchHandler = (searchTerm: any) => {
-    console.log(searchTerm);
+    setSearchTerm(searchTerm);
+    if (searchTerm) {
+      const newTaskList = tasks.filter((task: any) => {
+        return Object.values(task)
+          .join(' ')
+          .toLocaleLowerCase()
+          .includes(searchTerm.toLocaleLowerCase());
+      });
+      setSearchResults(newTaskList);
+    } else {
+      setSearchResults(tasks);
+    }
   };
 
   // Run the hook on mount
@@ -87,7 +99,7 @@ function App() {
               render={(props) => (
                 <TaskList
                   {...props}
-                  tasks={tasks}
+                  tasks={searchTerm.length < 1 ? tasks : searchResults}
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}
