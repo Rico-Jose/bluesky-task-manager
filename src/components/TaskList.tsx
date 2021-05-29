@@ -14,7 +14,7 @@ const TaskList = (props: any) => {
   });
 
   const getSearchTerm = () => {
-    console.log(inputElement.current.value);
+    props.searchKeyword(inputElement.current.value);
   };
 
   return (

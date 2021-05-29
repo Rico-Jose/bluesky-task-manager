@@ -55,7 +55,9 @@ function App() {
     setTasks(newTaskList);
   };
 
-  const searchHandler = () => {};
+  const searchHandler = (searchTerm: any) => {
+    console.log(searchTerm);
+  };
 
   // Run the hook on mount
   useEffect(() => {
