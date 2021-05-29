@@ -4,6 +4,7 @@ import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
 import TaskTable from './TaskTable';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
+import Button from '@material-ui/core/Button';
 
 const TaskList = (props: any) => {
   const inputElement = useRef<any>('');
@@ -33,6 +34,9 @@ const TaskList = (props: any) => {
   return (
     <main>
       <TaskTable tasks={props.tasks} />
+      <Button variant="contained" color="primary">
+        Primary
+      </Button>
       <div className="row">
         <div className="col-6">
           <h2>Task List</h2>
