@@ -41,9 +41,9 @@ const TaskList = (props: any) => {
             value={props.term}
             onChange={getSearchTerm}
           />
-          <span className="input-group-text border-0" id="search-addon">
+          {/* <span className="input-group-text border-0" id="search-addon">
             <FaTimes />
-          </span>
+          </span> */}
         </div>
       </div>
       {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
