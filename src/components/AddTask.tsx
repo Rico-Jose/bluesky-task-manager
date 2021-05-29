@@ -70,6 +70,7 @@ const AddTask = (props: any) => {
             onChange={(e) => setUser(e.target.value)}
             fullWidth
             required
+            disabled
           />
           <FormControlLabel
             control={

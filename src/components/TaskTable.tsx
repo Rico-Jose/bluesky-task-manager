@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   withStyles,
   Theme,
@@ -81,7 +82,14 @@ export default function TaskTable(props: any) {
           {props.tasks.map((task: any) => (
             <StyledTableRow key={task.name}>
               <StyledTableCell component="th" scope="row">
-                {task.name}
+                <Link
+                  to={{
+                    pathname: `/task/${task.id}`,
+                    state: { task: task },
+                  }}
+                >
+                  {task.name}
+                </Link>
               </StyledTableCell>
               <StyledTableCell align="right">{task.user}</StyledTableCell>
               <StyledTableCell align="right">
