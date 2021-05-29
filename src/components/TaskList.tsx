@@ -46,7 +46,7 @@ const TaskList = (props: any) => {
           </span>
         </div>
       </div>
-      {renderTaskList}
+      {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
     </main>
   );
 };
