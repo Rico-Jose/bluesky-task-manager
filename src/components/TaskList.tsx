@@ -33,7 +33,7 @@ const TaskList = (props: any) => {
 
   return (
     <main>
-      <TaskTable tasks={props.tasks} />
+      <TaskTable tasks={props.tasks} getTaskId={deleteTaskHandler} />
       <Link to="/add" style={{ textDecoration: 'none' }}>
         <Button variant="contained" color="primary">
           Add Task

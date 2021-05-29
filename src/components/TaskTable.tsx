@@ -91,7 +91,10 @@ export default function TaskTable(props: any) {
               </StyledTableCell>
               <StyledTableCell align="right">
                 <EditIcon />
-                <DeleteForeverIcon style={{ color: red[700] }} />
+                <DeleteForeverIcon
+                  style={{ color: red[700] }}
+                  onClick={() => props.getTaskId(task.id)}
+                />
               </StyledTableCell>
             </StyledTableRow>
           ))}
