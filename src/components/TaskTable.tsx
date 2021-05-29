@@ -64,7 +64,6 @@ const useStyles = makeStyles({
 });
 
 export default function TaskTable(props: any) {
-  console.log(props.tasks);
   const classes = useStyles();
 
   return (
@@ -86,7 +85,7 @@ export default function TaskTable(props: any) {
               </StyledTableCell>
               <StyledTableCell align="right">{task.user}</StyledTableCell>
               <StyledTableCell align="right">
-                {!task.isComplete && (
+                {task.isComplete && (
                   <CheckCircleIcon style={{ color: green[500] }} />
                 )}
               </StyledTableCell>
