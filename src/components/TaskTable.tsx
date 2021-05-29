@@ -98,7 +98,9 @@ export default function TaskTable(props: any) {
                 )}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <EditIcon />
+                <Link to={{ pathname: `/edit`, state: { task: task } }}>
+                  <EditIcon />
+                </Link>
                 <DeleteForeverIcon
                   style={{ color: red[700] }}
                   onClick={() => props.getTaskId(task.id)}

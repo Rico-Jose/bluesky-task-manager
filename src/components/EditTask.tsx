@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
+import { Grid, Paper, TextField } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 
 const EditTask = (props: any) => {
+  const paperStyle = {
+    padding: 20,
+    height: '70vh',
+    width: 380,
+    margin: '20px auto',
+  };
+
+  const btnStyle = { margin: '8px 0' };
+
   const [name, setName] = useState(props.location.state.task.name);
   const [user, setUser] = useState(props.location.state.task.user);
   const [isComplete, setIsComplete] = useState(
@@ -10,11 +23,6 @@ const EditTask = (props: any) => {
   const update = (e: any) => {
     // Don't refresh page
     e.preventDefault();
-
-    if (!name || !user) {
-      alert('Name and User are required');
-      return;
-    }
 
     const task = {
       id: props.location.state.task.id,
@@ -36,45 +44,53 @@ const EditTask = (props: any) => {
   };
 
   return (
-    <>
-      <h2 className="m-3">Edit Task</h2>
-      <form onSubmit={update}>
-        <div className="form-group m-3">
-          <label className="mb-3">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            name="name"
+    <form onSubmit={update}>
+      <Grid>
+        <Paper elevation={10} style={paperStyle}>
+          <Grid container justify="center">
+            <h2>Edit Task</h2>
+          </Grid>
+          <TextField
+            label="Name"
+            placeholder="Enter name"
+            style={btnStyle}
             value={name}
-            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
+            fullWidth
+            required
           />
-        </div>
-        <div className="form-group m-3">
-          <label className="mb-3">User</label>
-          <input
-            type="text"
-            className="form-control"
-            name="user"
+          <TextField
+            label="User"
+            placeholder="Enter user"
+            style={btnStyle}
             value={user}
-            placeholder="User"
             onChange={(e) => setUser(e.target.value)}
+            fullWidth
+            required
           />
-        </div>
-        <div className="form-group form-check m-3 pt-3">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            checked={isComplete}
-            onChange={(e) => setIsComplete(e.currentTarget.checked)}
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="primary"
+                checked={isComplete}
+                onChange={(e) => setIsComplete(e.currentTarget.checked)}
+              />
+            }
+            style={btnStyle}
+            label="Completed"
           />
-          <label className="form-check-label">Completed</label>
-        </div>
-        <button type="submit" className="btn btn-primary m-3">
-          Update
-        </button>
-      </form>
-    </>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            style={btnStyle}
+            fullWidth
+          >
+            Update
+          </Button>
+        </Paper>
+      </Grid>
+    </form>
   );
 };
 

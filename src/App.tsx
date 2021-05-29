@@ -45,6 +45,7 @@ function App() {
 
   // Edit task
   const editTaskHandler = (task: any) => {
+    console.log(task);
     setTasks(
       tasks.map((t: any) => {
         return t.id === task.id ? { ...task } : t;
@@ -131,14 +132,14 @@ function App() {
     getAllUsers();
   }, []);
 
-  /*   // Run the hook whenever tasks change
+  // Run the hook whenever tasks change
   useEffect(() => {
     console.log(tasks);
     console.log(tasks.length);
   }, [tasks]);
 
   // Run the hook whenever users change
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(users);
     console.log(users.length);
   }, [users]); */

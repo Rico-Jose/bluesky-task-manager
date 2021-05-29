@@ -22,11 +22,6 @@ const AddTask = (props: any) => {
     // Don't refresh page
     e.preventDefault();
 
-    if (!name || !user) {
-      alert('Name and User are required');
-      return;
-    }
-
     const task = {
       name: name,
       user: user,
@@ -64,18 +59,15 @@ const AddTask = (props: any) => {
           <TextField
             label="User"
             placeholder="Enter user"
-            type="password"
             style={btnStyle}
             value={user}
             onChange={(e) => setUser(e.target.value)}
             fullWidth
             required
-            disabled
           />
           <FormControlLabel
             control={
               <Checkbox
-                name="checkedB"
                 color="primary"
                 checked={isComplete}
                 onChange={(e) => setIsComplete(e.currentTarget.checked)}
