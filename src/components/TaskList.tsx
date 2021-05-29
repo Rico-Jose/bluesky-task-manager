@@ -5,6 +5,7 @@ import Dropdown from './Dropdown';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 
 const TaskList = (props: any) => {
+  console.log(props);
   const inputElement = useRef<any>('');
   const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
 

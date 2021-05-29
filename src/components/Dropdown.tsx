@@ -39,7 +39,7 @@ const Dropdown = (props: any) => {
         Select User
       </button>
       {open && (
-        <div aria-labelledby="dropdownMenuButton">
+        <div>
           {props.users.map((user: any) => (
             <a
               className="dropdown-item"

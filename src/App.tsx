@@ -103,6 +103,18 @@ function App() {
     }
   };
 
+  const combinedFilters = () => {
+    if (searchTerm.length < 1 && !isCompleteButton && !userFilter) {
+      return tasks;
+    } else if (!isCompleteButton && !userFilter) {
+      return searchResults;
+    } else if (searchTerm.length < 1 && !isCompleteButton) {
+      return userFilterResults;
+    } else if (searchTerm.length < 1 && !userFilter) {
+      return isCompleteResults;
+    }
+  };
+
   // Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
@@ -119,7 +131,7 @@ function App() {
     getAllUsers();
   }, []);
 
-  // Run the hook whenever tasks change
+  /*   // Run the hook whenever tasks change
   useEffect(() => {
     console.log(tasks);
     console.log(tasks.length);
@@ -129,7 +141,7 @@ function App() {
   useEffect(() => {
     console.log(users);
     console.log(users.length);
-  }, [users]);
+  }, [users]); */
 
   return (
     <div className="App">
@@ -145,14 +157,15 @@ function App() {
                   {...props}
                   //tasks={searchTerm.length < 1 ? tasks : searchResults}
                   //tasks={!isCompleteButton ? tasks : isCompleteResults}
-                  tasks={!userFilter ? tasks : userFilterResults}
-                  /* tasks={
-                    searchTerm.length < 1 && !isCompleteButton
+                  //tasks={!userFilter ? tasks : userFilterResults}
+                  tasks={
+                    combinedFilters()
+                    /* searchTerm.length < 1 && !isCompleteButton
                       ? tasks
                       : !isCompleteButton
                       ? searchResults
-                      : isCompleteResults
-                  } */
+                      : isCompleteResults */
+                  }
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}
