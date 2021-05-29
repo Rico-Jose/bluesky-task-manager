@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
+import TaskTable from './TaskTable';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 
 const TaskList = (props: any) => {
-  console.log(props);
   const inputElement = useRef<any>('');
   const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
 
@@ -32,6 +32,7 @@ const TaskList = (props: any) => {
 
   return (
     <main>
+      <TaskTable tasks={props.tasks} />
       <div className="row">
         <div className="col-6">
           <h2>Task List</h2>
