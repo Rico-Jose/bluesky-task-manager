@@ -42,40 +42,48 @@ const TaskList = (props: any) => {
         </div>
       </div>
       <div className="row">
-        <div className="input-group rounded">
-          <input
-            ref={inputElement}
-            type="search"
-            className="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
-            value={props.term}
-            onChange={getSearchTerm}
-          />
-          {/* <span className="input-group-text border-0" id="search-addon">
+        <div className="col-6">
+          <div className="input-group rounded">
+            <input
+              ref={inputElement}
+              type="search"
+              className="form-control rounded"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+              value={props.term}
+              onChange={getSearchTerm}
+            />
+            {/* <span className="input-group-text border-0" id="search-addon">
             <FaTimes />
           </span> */}
+          </div>
+        </div>
+        <div className="col-3">
+          <Dropdown users={props.users} getUserId={userFilterHandler} />
+        </div>
+        <div className="col-3">
+          <button
+            className="btn btn-primary"
+            value={isComplete}
+            onClick={() => toggle(!isComplete)}
+          >
+            {isComplete ? <FaToggleOff /> : <FaToggleOn />}
+          </button>
+          <label className="form-check-label">Completed</label>
+          {/* <div className="form-group form-check m-3 pt-3">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              checked={isComplete}
+              onChange={(e) => getIsComplete(e.currentTarget.checked)}
+            />
+          </div> */}
         </div>
       </div>
-      <div className="form-group form-check m-3 pt-3">
-        {/* <input
-          type="checkbox"
-          className="form-check-input"
-          checked={isComplete}
-          onChange={(e) => getIsComplete(e.currentTarget.checked)}
-        /> */}
-        <button
-          className="btn btn-primary"
-          value={isComplete}
-          onClick={() => toggle(!isComplete)}
-        >
-          {isComplete ? <FaToggleOff /> : <FaToggleOn />}
-        </button>
-        <label className="form-check-label">Completed</label>
+      <div>
+        {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
       </div>
-      <Dropdown users={props.users} getUserId={userFilterHandler} />
-      {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
     </main>
   );
 };

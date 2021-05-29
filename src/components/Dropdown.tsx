@@ -39,6 +39,19 @@ const Dropdown = (props: any) => {
         Select User
       </button>
       {open && (
+        <div aria-labelledby="dropdownMenuButton">
+          {props.users.map((user: any) => (
+            <a
+              className="dropdown-item"
+              key={user.id}
+              onClick={() => props.getUserId(user.id)}
+            >
+              {user.firstName}
+            </a>
+          ))}
+        </div>
+      )}
+      {/* {open && (
         <div>
           {props.users.map((user: any) => (
             <div key={user.id}>
@@ -51,7 +64,7 @@ const Dropdown = (props: any) => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };
