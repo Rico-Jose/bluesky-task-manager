@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
+import Dropdown from './Dropdown';
 /* import { FaTimes } from 'react-icons/fa'; */
 
 const TaskList = (props: any) => {
@@ -20,6 +21,11 @@ const TaskList = (props: any) => {
   };
 
   const getIsComplete = (e: any) => {
+    setIsComplete(e);
+    props.getFilter(e);
+  };
+
+  const toggle = (e: any) => {
     setIsComplete(e);
     props.getFilter(e);
   };
@@ -54,14 +60,23 @@ const TaskList = (props: any) => {
         </div>
       </div>
       <div className="form-group form-check m-3 pt-3">
-        <input
+        {/* <input
           type="checkbox"
           className="form-check-input"
           checked={isComplete}
           onChange={(e) => getIsComplete(e.currentTarget.checked)}
-        />
+        /> */}
+        <button
+          className="btn btn-secondary"
+          value={isComplete}
+          onClick={() => toggle(!isComplete)}
+          /* onKeyPress={(e) => toggle(!e.currentTarget.value)} */
+        >
+          {isComplete ? 'On' : 'Off'}
+        </button>
         <label className="form-check-label">Completed</label>
       </div>
+      <Dropdown />
       {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
     </main>
   );

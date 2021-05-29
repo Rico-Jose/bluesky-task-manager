@@ -17,10 +17,12 @@ function App() {
   const [isCompleteResults, setIsCompleteResults] = useState([]);
 
   // Retrieve users from the server
-  const retrieveUsers = () => {
-    axios.get('api/users').then((res) => {
-      setUsers([...users, ...res.data.users]);
-    });
+  const retrieveUsers = async () => {
+    const response = await axios.get('api/users');
+    return response.data.users;
+    // axios.get('api/users').then((res) => {
+    //   setUsers([...users, ...res.data.users]);
+    // });
   };
 
   // Retrieve todos from the server
@@ -92,14 +94,26 @@ function App() {
       if (allTasks) setTasks(allTasks);
     };
 
+    const getAllUsers = async () => {
+      const allUsers = await retrieveUsers();
+      if (allUsers) setUsers(allUsers);
+    };
+
     getAllTasks();
+    getAllUsers();
   }, []);
 
   // Run the hook whenever tasks change
   useEffect(() => {
-    //   console.log(tasks);
+    console.log(tasks);
     console.log(tasks.length);
   }, [tasks]);
+
+  // Run the hook whenever users change
+  useEffect(() => {
+    console.log(users);
+    console.log(users.length);
+  }, [users]);
 
   return (
     <div className="App">
