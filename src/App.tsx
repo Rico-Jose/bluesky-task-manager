@@ -9,24 +9,22 @@ import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  // Retrieve Users
+  const [users, setUsers] = useState<any>([]);
+  const [tasks, setTasks] = useState<any>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Retrieve users from the server
   const retrieveUsers = () => {
     axios.get('api/users').then((res) => {
       setUsers([...users, ...res.data.users]);
     });
   };
 
-  // Retrieve ToDos
+  // Retrieve todos from the server
   const retrieveTasks = async () => {
     const response = await axios.get('api/todos');
     return response.data.todos;
-    /* axios.get('api/todos').then((res) => {
-      setTasks([...tasks, ...res.data.todos]);
-    }); */
   };
-
-  const [users, setUsers] = useState<any>([]);
-  const [tasks, setTasks] = useState<any>([]);
 
   // Add task
   const addTaskHandler = async (task: any) => {
@@ -57,6 +55,8 @@ function App() {
     setTasks(newTaskList);
   };
 
+  const searchHandler = () => {};
+
   // Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
@@ -68,10 +68,10 @@ function App() {
   }, []);
 
   // Run the hook whenever tasks change
-  useEffect(() => {
-    console.log(tasks);
-    console.log(tasks.length);
-  }, [tasks]);
+  // useEffect(() => {
+  //   console.log(tasks);
+  //   console.log(tasks.length);
+  // }, [tasks]);
 
   return (
     <div className="App">
@@ -87,6 +87,8 @@ function App() {
                   {...props}
                   tasks={tasks}
                   getTaskId={deleteTaskHandler}
+                  term={searchTerm}
+                  searchKeyword={searchHandler}
                 />
               )}
             />

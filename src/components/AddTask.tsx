@@ -10,7 +10,7 @@ const AddTask = (props: any) => {
     e.preventDefault();
 
     if (!name || !user) {
-      alert('All fields are required');
+      alert('Name and User are required');
       return;
     }
 
