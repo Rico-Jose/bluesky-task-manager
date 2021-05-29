@@ -55,9 +55,6 @@ const TaskList = (props: any) => {
               value={props.term}
               onChange={getSearchTerm}
             />
-            {/* <span className="input-group-text border-0" id="search-addon">
-            <FaTimes />
-          </span> */}
           </div>
         </div>
         <div className="col-3">
@@ -72,14 +69,6 @@ const TaskList = (props: any) => {
             {isComplete ? <FaToggleOff /> : <FaToggleOn />}
           </button>
           <label className="form-check-label">Completed</label>
-          {/* <div className="form-group form-check m-3 pt-3">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              checked={isComplete}
-              onChange={(e) => getIsComplete(e.currentTarget.checked)}
-            />
-          </div> */}
         </div>
       </div>
       <div>
