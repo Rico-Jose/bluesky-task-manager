@@ -1,4 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Grid, Paper, TextField } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+
+const AddTask = (props: any) => {
+  const paperStyle = {
+    padding: 20,
+    height: '70vh',
+    width: 380,
+    margin: '20px auto',
+  };
+
+  const btnStyle = { margin: '8px 0' };
+
+  return (
+    <Grid>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid container justify="center">
+          <h2>Add Task</h2>
+        </Grid>
+        <TextField
+          label="Name"
+          placeholder="Enter name"
+          style={btnStyle}
+          fullWidth
+          required
+        />
+        <TextField
+          label="User"
+          placeholder="Enter password"
+          type="password"
+          style={btnStyle}
+          fullWidth
+          required
+        />
+        <FormControlLabel
+          control={<Checkbox name="checkedB" color="primary" />}
+          style={btnStyle}
+          label="Completed"
+        />
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          style={btnStyle}
+          fullWidth
+        >
+          Add
+        </Button>
+      </Paper>
+    </Grid>
+  );
+};
+
+export default AddTask;
+/* import React, { useState } from 'react';
 
 const AddTask = (props: any) => {
   const [name, setName] = useState('');
@@ -76,3 +133,4 @@ const AddTask = (props: any) => {
 };
 
 export default AddTask;
+ */

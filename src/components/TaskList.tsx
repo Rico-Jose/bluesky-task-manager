@@ -34,9 +34,11 @@ const TaskList = (props: any) => {
   return (
     <main>
       <TaskTable tasks={props.tasks} />
-      <Button variant="contained" color="primary">
-        Primary
-      </Button>
+      <Link to="/add" style={{ textDecoration: 'none' }}>
+        <Button variant="contained" color="primary">
+          Add Task
+        </Button>
+      </Link>
       <div className="row">
         <div className="col-6">
           <h2>Task List</h2>
