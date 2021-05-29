@@ -100,6 +100,11 @@ export default function TaskTable(props: any) {
           ))}
         </TableBody>
       </Table>
+      {props.tasks.length < 1 ? (
+        <h2 style={{ margin: '20px', textAlign: 'center' }}>
+          No Tasks Available
+        </h2>
+      ) : null}
     </TableContainer>
   );
 }
