@@ -113,7 +113,15 @@ function App() {
               render={(props) => (
                 <TaskList
                   {...props}
-                  tasks={!isCompleteButton ? tasks : isCompleteResults}
+                  //tasks={searchTerm.length < 1 ? tasks : searchResults}
+                  //tasks={!isCompleteButton ? tasks : isCompleteResults}
+                  tasks={
+                    searchTerm.length < 1 && !isCompleteButton
+                      ? tasks
+                      : !isCompleteButton
+                      ? searchResults
+                      : isCompleteResults
+                  }
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}
