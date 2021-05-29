@@ -13,6 +13,8 @@ function App() {
   const [tasks, setTasks] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isCompleteButton, setIsCompleteButton] = useState(false);
+  const [isCompleteResults, setIsCompleteResults] = useState([]);
 
   // Retrieve users from the server
   const retrieveUsers = () => {
@@ -71,6 +73,18 @@ function App() {
     }
   };
 
+  const buttonHandler = (e: any) => {
+    setIsCompleteButton(e);
+    if (e) {
+      const newTaskList = tasks.filter((task: any) => {
+        return task.isComplete === e;
+      });
+      setIsCompleteResults(newTaskList);
+    } else {
+      setIsCompleteResults(tasks);
+    }
+  };
+
   // Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
@@ -82,10 +96,10 @@ function App() {
   }, []);
 
   // Run the hook whenever tasks change
-  // useEffect(() => {
-  //   console.log(tasks);
-  //   console.log(tasks.length);
-  // }, [tasks]);
+  useEffect(() => {
+    //   console.log(tasks);
+    console.log(tasks.length);
+  }, [tasks]);
 
   return (
     <div className="App">
@@ -99,10 +113,12 @@ function App() {
               render={(props) => (
                 <TaskList
                   {...props}
-                  tasks={searchTerm.length < 1 ? tasks : searchResults}
+                  tasks={!isCompleteButton ? tasks : isCompleteResults}
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}
+                  isCompleteFilter={isCompleteButton}
+                  getFilter={buttonHandler}
                 />
               )}
             />

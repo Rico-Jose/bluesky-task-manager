@@ -1,10 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
-import { FaTimes } from 'react-icons/fa';
+/* import { FaTimes } from 'react-icons/fa'; */
 
 const TaskList = (props: any) => {
+  //console.log(props.isCompleteFilter);
   const inputElement = useRef<any>('');
+  const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
   const deleteTaskHandler = (id: any) => {
     props.getTaskId(id);
   };
@@ -15,6 +17,11 @@ const TaskList = (props: any) => {
 
   const getSearchTerm = () => {
     props.searchKeyword(inputElement.current.value);
+  };
+
+  const getIsComplete = (e: any) => {
+    setIsComplete(e);
+    props.getFilter(e);
   };
 
   return (
@@ -45,6 +52,15 @@ const TaskList = (props: any) => {
             <FaTimes />
           </span> */}
         </div>
+      </div>
+      <div className="form-group form-check m-3 pt-3">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          checked={isComplete}
+          onChange={(e) => getIsComplete(e.currentTarget.checked)}
+        />
+        <label className="form-check-label">Completed</label>
       </div>
       {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
     </main>
