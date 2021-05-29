@@ -15,6 +15,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isCompleteButton, setIsCompleteButton] = useState(false);
   const [isCompleteResults, setIsCompleteResults] = useState([]);
+  // const [userFilter, setUserFilter] = useState('');
+  // const [userFilterResults, setUserFilterResults] = useState([]);
 
   // Retrieve users from the server
   const retrieveUsers = async () => {
@@ -87,6 +89,10 @@ function App() {
     }
   };
 
+  const userFilterHandler = (e: any) => {
+    console.log(e);
+  };
+
   // Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
@@ -103,7 +109,7 @@ function App() {
     getAllUsers();
   }, []);
 
-  // Run the hook whenever tasks change
+  /*   // Run the hook whenever tasks change
   useEffect(() => {
     console.log(tasks);
     console.log(tasks.length);
@@ -113,7 +119,7 @@ function App() {
   useEffect(() => {
     console.log(users);
     console.log(users.length);
-  }, [users]);
+  }, [users]); */
 
   return (
     <div className="App">
@@ -141,6 +147,8 @@ function App() {
                   searchKeyword={searchHandler}
                   isCompleteFilter={isCompleteButton}
                   getFilter={buttonHandler}
+                  users={users}
+                  getUserFilter={userFilterHandler}
                 />
               )}
             />

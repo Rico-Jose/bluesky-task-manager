@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
-/* import { FaTimes } from 'react-icons/fa'; */
+import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 
 const TaskList = (props: any) => {
-  //console.log(props.isCompleteFilter);
   const inputElement = useRef<any>('');
   const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
+
   const deleteTaskHandler = (id: any) => {
     props.getTaskId(id);
   };
@@ -20,14 +20,13 @@ const TaskList = (props: any) => {
     props.searchKeyword(inputElement.current.value);
   };
 
-  const getIsComplete = (e: any) => {
+  const toggle = (e: any) => {
     setIsComplete(e);
     props.getFilter(e);
   };
 
-  const toggle = (e: any) => {
-    setIsComplete(e);
-    props.getFilter(e);
+  const userFilterHandler = (id: any) => {
+    props.getUserFilter(id);
   };
 
   return (
@@ -67,16 +66,15 @@ const TaskList = (props: any) => {
           onChange={(e) => getIsComplete(e.currentTarget.checked)}
         /> */}
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           value={isComplete}
           onClick={() => toggle(!isComplete)}
-          /* onKeyPress={(e) => toggle(!e.currentTarget.value)} */
         >
-          {isComplete ? 'On' : 'Off'}
+          {isComplete ? <FaToggleOff /> : <FaToggleOn />}
         </button>
         <label className="form-check-label">Completed</label>
       </div>
-      <Dropdown />
+      <Dropdown users={props.users} getUserId={userFilterHandler} />
       {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
     </main>
   );
