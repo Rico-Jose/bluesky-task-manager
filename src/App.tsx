@@ -15,8 +15,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isCompleteButton, setIsCompleteButton] = useState(false);
   const [isCompleteResults, setIsCompleteResults] = useState([]);
-  // const [userFilter, setUserFilter] = useState('');
-  // const [userFilterResults, setUserFilterResults] = useState([]);
+  const [userFilter, setUserFilter] = useState(null);
+  const [userFilterResults, setUserFilterResults] = useState([]);
 
   // Retrieve users from the server
   const retrieveUsers = async () => {
@@ -90,7 +90,17 @@ function App() {
   };
 
   const userFilterHandler = (e: any) => {
-    console.log(e);
+    setUserFilter(e);
+    // console.log(tasks);
+    // console.log(e);
+    if (e) {
+      const newTaskList = tasks.filter((task: any) => {
+        return task.user == e;
+      });
+      setUserFilterResults(newTaskList);
+    } else {
+      setUserFilterResults(tasks);
+    }
   };
 
   // Run the hook on mount
@@ -135,13 +145,14 @@ function App() {
                   {...props}
                   //tasks={searchTerm.length < 1 ? tasks : searchResults}
                   //tasks={!isCompleteButton ? tasks : isCompleteResults}
-                  tasks={
+                  tasks={!userFilter ? tasks : userFilterResults}
+                  /* tasks={
                     searchTerm.length < 1 && !isCompleteButton
                       ? tasks
                       : !isCompleteButton
                       ? searchResults
                       : isCompleteResults
-                  }
+                  } */
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}
