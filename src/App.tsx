@@ -18,34 +18,34 @@ function App() {
   const [userFilter, setUserFilter] = useState(null);
   const [userFilterResults, setUserFilterResults] = useState([]);
 
-  // Retrieve users from the server
+  //  Retrieve users from the server
   const retrieveUsers = async () => {
+    //  GET api/users
     const response = await axios.get('api/users');
     return response.data.users;
-    // axios.get('api/users').then((res) => {
-    //   setUsers([...users, ...res.data.users]);
-    // });
   };
 
-  // Retrieve todos from the server
+  //  Retrieve todos from the server
   const retrieveTasks = async () => {
+    //  GET api/todos
     const response = await axios.get('api/todos');
     return response.data.todos;
   };
 
-  // Add task
+  //  Add task
   const addTaskHandler = async (task: any) => {
+    //  POST api/todo/create
     const response = await axios.post('api/todo/create', { task });
-
+    //  Add new task to the UI
     setTasks([
       ...tasks,
       { id: response.data.todo.id, ...response.data.todo.task },
     ]);
   };
 
-  // Edit task
+  //  Edit task
   const editTaskHandler = (task: any) => {
-    console.log(task);
+    //  Edit task in UI
     setTasks(
       tasks.map((t: any) => {
         return t.id === task.id ? { ...task } : t;
@@ -53,16 +53,19 @@ function App() {
     );
   };
 
-  // Delete task
+  //  Delete task
   const deleteTaskHandler = async (id: any) => {
+    //  DELETE api/todo/:id/delete
     await axios.delete(`api/todo/${id}/delete`);
-    const newTaskList = tasks.filter((task: any) => {
-      return task.id !== id;
-    });
-
-    setTasks(newTaskList);
+    //  Delete task in UI
+    setTasks(
+      tasks.filter((task: any) => {
+        return task.id !== id;
+      })
+    );
   };
 
+  //  Filter by name
   const searchHandler = (searchTerm: any) => {
     setSearchTerm(searchTerm);
     if (searchTerm) {
@@ -78,6 +81,7 @@ function App() {
     }
   };
 
+  //  Filter by completed
   const buttonHandler = (e: any) => {
     setIsCompleteButton(e);
     if (e) {
@@ -90,10 +94,9 @@ function App() {
     }
   };
 
+  //  Filter by user
   const userFilterHandler = (e: any) => {
     setUserFilter(e);
-    // console.log(tasks);
-    // console.log(e);
     if (e) {
       const newTaskList = tasks.filter((task: any) => {
         return task.user === e;
@@ -116,7 +119,7 @@ function App() {
     }
   };
 
-  // Run the hook on mount
+  //  Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
       const allTasks = await retrieveTasks();
@@ -132,18 +135,6 @@ function App() {
     getAllUsers();
   }, []);
 
-  // Run the hook whenever tasks change
-  /*   useEffect(() => {
-    console.log(tasks);
-    console.log(tasks.length);
-  }, [tasks]);
-
-  // Run the hook whenever users change
-  useEffect(() => {
-    console.log(users);
-    console.log(users.length);
-  }, [users]); */
-
   return (
     <div className="App">
       <Router>
@@ -156,17 +147,7 @@ function App() {
               render={(props) => (
                 <TaskList
                   {...props}
-                  //tasks={searchTerm.length < 1 ? tasks : searchResults}
-                  //tasks={!isCompleteButton ? tasks : isCompleteResults}
-                  //tasks={!userFilter ? tasks : userFilterResults}
-                  tasks={
-                    combinedFilters()
-                    /* searchTerm.length < 1 && !isCompleteButton
-                      ? tasks
-                      : !isCompleteButton
-                      ? searchResults
-                      : isCompleteResults */
-                  }
+                  tasks={combinedFilters()}
                   getTaskId={deleteTaskHandler}
                   term={searchTerm}
                   searchKeyword={searchHandler}

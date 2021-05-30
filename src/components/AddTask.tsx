@@ -21,7 +21,7 @@ const AddTask = (props: any) => {
   const [isComplete, setIsComplete] = useState(false);
 
   const add = (e: any) => {
-    // Don't refresh page
+    //  Don't refresh page
     e.preventDefault();
 
     const task = {
@@ -30,15 +30,15 @@ const AddTask = (props: any) => {
       isComplete: isComplete,
     };
 
-    // Pass data to parent component
+    //  Pass data to parent component
     props.addTaskHandler(task);
 
-    // Reset values
+    //  Reset values
     setName('');
     setUser('');
     setIsComplete(false);
 
-    // Go to back the home page
+    //  Go to back the home page
     props.history.push('/');
   };
 

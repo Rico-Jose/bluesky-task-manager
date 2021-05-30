@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import TaskCard from './TaskCard';
 import DropdownFilter from './DropdownFilter';
 import TaskTable from './TaskTable';
 import Button from '@material-ui/core/Button';
@@ -12,23 +11,23 @@ const TaskList = (props: any) => {
   const inputElement = useRef<any>('');
   const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
 
+  //  Pass task id to parent component
   const deleteTaskHandler = (id: any) => {
     props.getTaskId(id);
   };
 
-  const renderTaskList = props.tasks.map((task: any) => {
-    return <TaskCard task={task} getTaskId={deleteTaskHandler} key={task.id} />;
-  });
-
+  //  Pass value to parent component
   const getSearchTerm = () => {
     props.searchKeyword(inputElement.current.value);
   };
 
+  //  Pass value to parent component
   const toggle = (e: any) => {
     setIsComplete(e);
     props.getFilter(e);
   };
 
+  //  Pass value to parent component
   const userFilterHandler = (id: any) => {
     props.getUserFilter(id);
   };

@@ -23,7 +23,7 @@ const EditTask = (props: any) => {
   );
 
   const update = (e: any) => {
-    // Don't refresh page
+    //  Don't refresh page
     e.preventDefault();
 
     const task = {
@@ -33,15 +33,15 @@ const EditTask = (props: any) => {
       isComplete: isComplete,
     };
 
-    // Pass data to parent component
+    //  Pass data to parent component
     props.editTaskHandler(task);
 
-    // Reset values
+    //  Reset values
     setName('');
     setUser('');
     setIsComplete(false);
 
-    // Go to back the home page
+    //  Go to back the home page
     props.history.push('/');
   };
 

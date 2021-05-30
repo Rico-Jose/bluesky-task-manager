@@ -20,6 +20,7 @@ export default function UsersDropdown(props: any) {
   const classes = useStyles();
   const [user, setUser] = React.useState('');
 
+  //  Run the hook on mount
   useEffect(() => {
     setUser(props.user);
   }, []);
