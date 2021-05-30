@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import UsersDropdown from './UsersDropdown';
 import { Grid, Paper, TextField } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -43,6 +44,10 @@ const EditTask = (props: any) => {
     props.history.push('/');
   };
 
+  const getUserId = (id: any) => {
+    setUser(id);
+  };
+
   return (
     <form onSubmit={update}>
       <Grid>
@@ -59,14 +64,10 @@ const EditTask = (props: any) => {
             fullWidth
             required
           />
-          <TextField
-            label="User"
-            placeholder="Enter user"
-            style={btnStyle}
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            fullWidth
-            required
+          <UsersDropdown
+            users={props.users}
+            getUserId={getUserId}
+            user={user}
           />
           <FormControlLabel
             control={

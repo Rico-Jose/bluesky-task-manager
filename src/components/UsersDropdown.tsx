@@ -20,6 +20,10 @@ export default function UsersDropdown(props: any) {
   const classes = useStyles();
   const [user, setUser] = React.useState('');
 
+  useEffect(() => {
+    setUser(props.user);
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
     setUser(event.target.value as string);
     props.getUserId(event.target.value as string);

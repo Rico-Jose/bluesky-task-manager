@@ -77,6 +77,7 @@ export default function TaskTable(props: any) {
                     pathname: `/task/${task.id}`,
                     state: { task: task },
                   }}
+                  style={{ textDecoration: 'none' }}
                 >
                   {task.name}
                 </Link>

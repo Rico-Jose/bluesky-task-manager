@@ -190,7 +190,11 @@ function App() {
             <Route
               path="/edit"
               render={(props) => (
-                <EditTask {...props} editTaskHandler={editTaskHandler} />
+                <EditTask
+                  {...props}
+                  editTaskHandler={editTaskHandler}
+                  users={users}
+                />
               )}
             />
             <Route path="/task/:id" component={TaskDetail} />
