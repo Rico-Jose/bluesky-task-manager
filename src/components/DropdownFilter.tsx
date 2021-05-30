@@ -15,7 +15,6 @@ const BootstrapInput = withStyles((theme: Theme) =>
     input: {
       borderRadius: 4,
       position: 'relative',
-      backgroundColor: theme.palette.background.paper,
       border: '1px solid #ced4da',
       fontSize: 16,
       padding: '10px 26px 10px 12px',
@@ -60,8 +59,8 @@ export default function DropdownFilter(props: any) {
 
   return (
     <div>
-      <FormControl className={classes.margin}>
-        <InputLabel>Age</InputLabel>
+      <FormControl className={classes.margin} style={{ marginLeft: '80px' }}>
+        <InputLabel style={{ margin: '-10px 15px' }}>Filter by User</InputLabel>
         <NativeSelect
           value={user}
           onChange={handleChange}
@@ -78,49 +77,3 @@ export default function DropdownFilter(props: any) {
     </div>
   );
 }
-
-/* import React, { useState } from 'react';
-
-const DropdownFilter = (props: any) => {
-  const [open, setOpen] = useState(false);
-
-  const toggle = (e: boolean) => setOpen(!open);
-
-  return (
-    <div className="dropdown">
-      <button
-        className="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        onKeyPress={() => toggle(!open)}
-        onClick={() => toggle(!open)}
-        style={{
-          display: 'block',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
-      >
-        Select User
-      </button>
-      {open && (
-        <div>
-          {props.users.map((user: any) => (
-            <a
-              className="dropdown-item"
-              key={user.id}
-              onClick={() => props.getUserId(user.id)}
-            >
-              {user.firstName}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default DropdownFilter;
- */
