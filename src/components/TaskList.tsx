@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
 import TaskTable from './TaskTable';
-import SearchBar from './SearchBar';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
 
@@ -34,23 +33,6 @@ const TaskList = (props: any) => {
 
   return (
     <main>
-      <SearchBar tasks={props.tasks} />
-      <TaskTable tasks={props.tasks} getTaskId={deleteTaskHandler} />
-      <Link to="/add" style={{ textDecoration: 'none' }}>
-        <Button variant="contained" color="primary">
-          Add Task
-        </Button>
-      </Link>
-      <div className="row">
-        <div className="col-6">
-          <h2>Task List</h2>
-        </div>
-        <div className="col-6">
-          <Link to="/add">
-            <button className="btn btn-primary">Add Task</button>
-          </Link>
-        </div>
-      </div>
       <div className="row">
         <div className="col-6">
           <div className="input-group rounded">
@@ -80,8 +62,28 @@ const TaskList = (props: any) => {
           <label className="form-check-label">Completed</label>
         </div>
       </div>
+      <br />
       <div>
+        <TaskTable tasks={props.tasks} getTaskId={deleteTaskHandler} />
+        <Link to="/add" style={{ textDecoration: 'none' }}>
+          <Button variant="contained" color="primary">
+            Add Task
+          </Button>
+        </Link>
+
+        {/* 
+        <div className="row">
+          <div className="col-6">
+            <h2>Task List</h2>
+          </div>
+          <div className="col-6">
+            <Link to="/add">
+              <button className="btn btn-primary">Add Task</button>
+            </Link>
+          </div>
+        </div>
         {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
+        */}
       </div>
     </main>
   );
