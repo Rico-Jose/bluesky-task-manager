@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
 import TaskTable from './TaskTable';
-import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
@@ -43,7 +42,7 @@ const TaskList = (props: any) => {
               ref={inputElement}
               type="search"
               className="form-control rounded"
-              placeholder="Search"
+              placeholder="Enter Name"
               aria-label="Search"
               aria-describedby="search-addon"
               value={props.term}
@@ -55,19 +54,21 @@ const TaskList = (props: any) => {
           <Dropdown users={props.users} getUserId={userFilterHandler} />
         </div>
         <div className="col-3">
-          <button
-            className="btn"
-            value={isComplete}
-            onClick={() => toggle(!isComplete)}
-            style={{ margin: '0 10px' }}
-          >
-            {isComplete ? (
-              <ToggleOffIcon fontSize="large" color="disabled" />
-            ) : (
-              <ToggleOnIcon fontSize="large" style={{ color: green[500] }} />
-            )}
-          </button>
-          <label className="form-check-label">Completed</label>
+          <div>
+            <button
+              className="btn"
+              value={isComplete}
+              onClick={() => toggle(!isComplete)}
+              style={{ margin: '0 10px' }}
+            >
+              {isComplete ? (
+                <ToggleOffIcon fontSize="large" color="disabled" />
+              ) : (
+                <ToggleOnIcon fontSize="large" style={{ color: green[500] }} />
+              )}
+            </button>
+            <label className="form-check-label">Completed</label>
+          </div>
         </div>
       </div>
       <br />

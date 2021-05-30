@@ -35,6 +35,11 @@ const Dropdown = (props: any) => {
         aria-expanded="false"
         onKeyPress={() => toggle(!open)}
         onClick={() => toggle(!open)}
+        style={{
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
       >
         Select User
       </button>
