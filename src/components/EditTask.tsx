@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import UsersDropdown from './UsersDropdown';
 import { Grid, Paper, TextField } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -89,6 +90,21 @@ const EditTask = (props: any) => {
           >
             Update
           </Button>
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              style={btnStyle}
+              fullWidth
+            >
+              Cancel
+            </Button>
+          </Link>
         </Paper>
       </Grid>
     </form>
