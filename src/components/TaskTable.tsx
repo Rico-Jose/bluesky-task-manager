@@ -40,24 +40,6 @@ const StyledTableRow = withStyles((theme: Theme) =>
   })
 )(TableRow);
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -66,6 +48,14 @@ const useStyles = makeStyles({
 
 export default function TaskTable(props: any) {
   const classes = useStyles();
+
+  const getUserName = (id: any) => {
+    return props.users.length > 0
+      ? props.users.find((user: any) => {
+          return user.id === id;
+        })
+      : '';
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -91,7 +81,9 @@ export default function TaskTable(props: any) {
                   {task.name}
                 </Link>
               </StyledTableCell>
-              <StyledTableCell align="right">{task.user}</StyledTableCell>
+              <StyledTableCell align="right">
+                {getUserName(task.user).firstName}
+              </StyledTableCell>
               <StyledTableCell align="right">
                 {task.isComplete && (
                   <CheckCircleIcon style={{ color: green[500] }} />
