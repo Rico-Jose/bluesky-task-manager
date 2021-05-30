@@ -62,15 +62,6 @@ const AddTask = (props: any) => {
             required
           />
           <UsersDropdown users={props.users} getUserId={getUserId} />
-          {/* <TextField
-            label="User"
-            placeholder="Enter user"
-            style={btnStyle}
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            fullWidth
-            required
-          /> */}
           <FormControlLabel
             control={
               <Checkbox

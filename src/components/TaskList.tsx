@@ -47,6 +47,7 @@ const TaskList = (props: any) => {
               aria-describedby="search-addon"
               value={props.term}
               onChange={getSearchTerm}
+              style={{ margin: '10px' }}
             />
           </div>
         </div>
@@ -59,7 +60,7 @@ const TaskList = (props: any) => {
               className="btn"
               value={isComplete}
               onClick={() => toggle(!isComplete)}
-              style={{ margin: '0 10px' }}
+              style={{ margin: '5px 10px' }}
             >
               {isComplete ? (
                 <ToggleOffIcon fontSize="large" color="disabled" />
