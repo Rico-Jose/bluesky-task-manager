@@ -5,6 +5,9 @@ import Dropdown from './Dropdown';
 import TaskTable from './TaskTable';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
+import ToggleOnIcon from '@material-ui/icons/ToggleOn';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff';
+import { green } from '@material-ui/core/colors';
 
 const TaskList = (props: any) => {
   const inputElement = useRef<any>('');
@@ -53,11 +56,16 @@ const TaskList = (props: any) => {
         </div>
         <div className="col-3">
           <button
-            className="btn btn-primary"
+            className="btn"
             value={isComplete}
             onClick={() => toggle(!isComplete)}
+            style={{ margin: '0 10px' }}
           >
-            {isComplete ? <FaToggleOff /> : <FaToggleOn />}
+            {isComplete ? (
+              <ToggleOffIcon fontSize="large" color="disabled" />
+            ) : (
+              <ToggleOnIcon fontSize="large" style={{ color: green[500] }} />
+            )}
           </button>
           <label className="form-check-label">Completed</label>
         </div>
