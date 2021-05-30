@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
-import Dropdown from './Dropdown';
+import DropdownFilter from './DropdownFilter';
 import TaskTable from './TaskTable';
 import Button from '@material-ui/core/Button';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
@@ -51,7 +51,7 @@ const TaskList = (props: any) => {
           </div>
         </div>
         <div className="col-3">
-          <Dropdown users={props.users} getUserId={userFilterHandler} />
+          <DropdownFilter users={props.users} getUserId={userFilterHandler} />
         </div>
         <div className="col-3">
           <div>

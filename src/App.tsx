@@ -96,7 +96,7 @@ function App() {
     // console.log(e);
     if (e) {
       const newTaskList = tasks.filter((task: any) => {
-        return task.user == e;
+        return task.user === e;
       });
       setUserFilterResults(newTaskList);
     } else {
@@ -180,7 +180,11 @@ function App() {
             <Route
               path="/add"
               render={(props) => (
-                <AddTask {...props} addTaskHandler={addTaskHandler} />
+                <AddTask
+                  {...props}
+                  addTaskHandler={addTaskHandler}
+                  users={users}
+                />
               )}
             />
             <Route
