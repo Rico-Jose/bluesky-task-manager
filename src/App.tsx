@@ -133,13 +133,13 @@ function App() {
   }, []);
 
   // Run the hook whenever tasks change
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(tasks);
     console.log(tasks.length);
   }, [tasks]);
 
   // Run the hook whenever users change
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log(users);
     console.log(users.length);
   }, [users]); */

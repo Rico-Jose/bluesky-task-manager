@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TaskCard from './TaskCard';
 import Dropdown from './Dropdown';
 import TaskTable from './TaskTable';
+import SearchBar from './SearchBar';
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
 
@@ -33,6 +34,7 @@ const TaskList = (props: any) => {
 
   return (
     <main>
+      <SearchBar tasks={props.tasks} />
       <TaskTable tasks={props.tasks} getTaskId={deleteTaskHandler} />
       <Link to="/add" style={{ textDecoration: 'none' }}>
         <Button variant="contained" color="primary">
