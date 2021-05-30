@@ -42,7 +42,7 @@ export default function UsersDropdown(props: any) {
         >
           {props.users.map((user: any) => (
             <MenuItem value={user.id} key={user.id}>
-              {user.firstName}
+              {user.firstName} {user.lastName}
             </MenuItem>
           ))}
         </Select>

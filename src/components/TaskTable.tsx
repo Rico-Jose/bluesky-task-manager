@@ -83,7 +83,9 @@ export default function TaskTable(props: any) {
                 </Link>
               </StyledTableCell>
               <StyledTableCell align="right">
-                {getUserName(task.user).firstName}
+                {`${getUserName(task.user).firstName} ${
+                  getUserName(task.user).lastName
+                }`}
               </StyledTableCell>
               <StyledTableCell align="right">
                 {task.isComplete && (
