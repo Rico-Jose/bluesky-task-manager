@@ -65,25 +65,12 @@ const TaskList = (props: any) => {
       <br />
       <div>
         <TaskTable tasks={props.tasks} getTaskId={deleteTaskHandler} />
+        <br />
         <Link to="/add" style={{ textDecoration: 'none' }}>
           <Button variant="contained" color="primary">
             Add Task
           </Button>
         </Link>
-
-        {/* 
-        <div className="row">
-          <div className="col-6">
-            <h2>Task List</h2>
-          </div>
-          <div className="col-6">
-            <Link to="/add">
-              <button className="btn btn-primary">Add Task</button>
-            </Link>
-          </div>
-        </div>
-        {renderTaskList.length > 0 ? renderTaskList : 'No Tasks Available'}
-        */}
       </div>
     </main>
   );
