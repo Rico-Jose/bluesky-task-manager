@@ -43,7 +43,7 @@ Prompt the user when adding a task without the required fields
 ![](./src/images/2/1.png)
 ![](./src/images/2/2.png)
 
-Required fields filled
+Required fields are filled
 ![](./src/images/2/3.png)
 
 Task added
@@ -71,4 +71,4 @@ Search by isCompleted
 ![](./src/images/5/3.png)
 
 If there is no task to show
-![](./src/images/6/6.png)
+![](./src/images/6/1.png)
