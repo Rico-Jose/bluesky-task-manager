@@ -61,7 +61,7 @@ const TaskList = (props: any) => {
               onClick={() => toggle(!isComplete)}
               style={{ margin: '5px 10px' }}
             >
-              {isComplete ? (
+              {!isComplete ? (
                 <ToggleOffIcon fontSize="large" color="disabled" />
               ) : (
                 <ToggleOnIcon fontSize="large" style={{ color: green[500] }} />
