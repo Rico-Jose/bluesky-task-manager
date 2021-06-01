@@ -51,7 +51,8 @@ const useStyles = makeStyles({
 export default function TaskTable(props: any) {
   const classes = useStyles();
 
-  const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [taskId, setTaskId] = useState('');
 
   const getUserName = (id: any) => {
@@ -64,12 +65,19 @@ export default function TaskTable(props: any) {
 
   const handleClickOpen = (taskId: string) => {
     setTaskId(taskId);
-    setOpen(true);
+    setOpenAlert(true);
   };
 
-  const handleClose = (isDelete: boolean) => {
-    setOpen(false);
-    if (isDelete) props.getTaskId(taskId);
+  const handleCloseAlert = (isDelete: boolean) => {
+    setOpenAlert(false);
+    if (isDelete) {
+      props.getTaskId(taskId);
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -115,7 +123,7 @@ export default function TaskTable(props: any) {
                   style={{ color: red[700] }}
                   onClick={() => handleClickOpen(task.id)}
                 />
-                <DeleteAlert open={open} onClose={handleClose} />
+                <DeleteAlert open={openAlert} onClose={handleCloseAlert} />
               </StyledTableCell>
             </StyledTableRow>
           ))}
@@ -126,7 +134,10 @@ export default function TaskTable(props: any) {
           No Tasks Available
         </h2>
       ) : null}
-      <DeleteSuccessSnackbar />
+      <DeleteSuccessSnackbar
+        openSnackbar={openSnackbar}
+        onClose={handleCloseSnackbar}
+      />
     </TableContainer>
   );
 }
