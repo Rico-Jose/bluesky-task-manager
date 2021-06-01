@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
-import TaskList from './components/TaskList';
+import TaskPage from './components/TaskPage';
 import AddTask from './components/AddTask';
 import EditTask from './components/EditTask';
 import TaskDetail from './components/TaskDetail';
@@ -147,7 +147,7 @@ function App() {
               path="/"
               exact
               render={(props) => (
-                <TaskList
+                <TaskPage
                   {...props}
                   tasks={combinedFilters()}
                   getTaskId={deleteTaskHandler}
