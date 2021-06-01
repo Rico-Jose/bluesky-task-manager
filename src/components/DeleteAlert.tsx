@@ -7,24 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function DeleteAlert(props: any) {
-  //const [open, setOpen] = React.useState(false);
-
-  //setOpen(props.open);
-  //  const open = true;
-
   let open = props.open;
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-
-  //   const handleClose = () => {
-  //     open = false;
-  //     setOpen(false);
-  //   };
-
-  //   console.log('props.open: ' + props.open);
-  //   console.log('open: ' + open);
 
   return (
     <Dialog

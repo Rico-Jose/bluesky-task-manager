@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DeleteAlert from './DeleteAlert';
+import DeleteSuccessSnackbar from './DeleteSuccessSnackbar';
 import { Link } from 'react-router-dom';
 import {
   withStyles,
@@ -67,11 +68,8 @@ export default function TaskTable(props: any) {
   };
 
   const handleClose = (isDelete: boolean) => {
-    console.log(isDelete);
     setOpen(false);
-    if (isDelete) {
-      props.getTaskId(taskId);
-    }
+    if (isDelete) props.getTaskId(taskId);
   };
 
   return (
@@ -128,6 +126,7 @@ export default function TaskTable(props: any) {
           No Tasks Available
         </h2>
       ) : null}
+      <DeleteSuccessSnackbar />
     </TableContainer>
   );
 }
