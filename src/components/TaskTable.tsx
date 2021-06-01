@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DeleteAlert from './DeleteAlert';
 import { Link } from 'react-router-dom';
 import {
   withStyles,
@@ -49,12 +50,28 @@ const useStyles = makeStyles({
 export default function TaskTable(props: any) {
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+  const [taskId, setTaskId] = useState('');
+
   const getUserName = (id: any) => {
     return props.users.length > 0
       ? props.users.find((user: any) => {
           return user.id === id;
         })
       : '';
+  };
+
+  const handleClickOpen = (taskId: string) => {
+    setTaskId(taskId);
+    setOpen(true);
+  };
+
+  const handleClose = (isDelete: boolean) => {
+    console.log(isDelete);
+    setOpen(false);
+    if (isDelete) {
+      props.getTaskId(taskId);
+    }
   };
 
   return (
@@ -98,8 +115,9 @@ export default function TaskTable(props: any) {
                 </Link>
                 <DeleteForeverIcon
                   style={{ color: red[700] }}
-                  onClick={() => props.getTaskId(task.id)}
+                  onClick={() => handleClickOpen(task.id)}
                 />
+                <DeleteAlert open={open} onClose={handleClose} />
               </StyledTableCell>
             </StyledTableRow>
           ))}
