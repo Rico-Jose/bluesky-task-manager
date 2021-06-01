@@ -82,11 +82,11 @@ function App() {
   };
 
   //  Filter by completed
-  const buttonHandler = (e: any) => {
-    setIsCompleteButton(e);
-    if (e) {
+  const buttonHandler = (isComplete: any) => {
+    setIsCompleteButton(isComplete);
+    if (isComplete) {
       const newTaskList = tasks.filter((task: any) => {
-        return task.isComplete === e;
+        return task.isComplete === isComplete;
       });
       setIsCompleteResults(newTaskList);
     } else {
@@ -95,11 +95,11 @@ function App() {
   };
 
   //  Filter by user
-  const userFilterHandler = (e: any) => {
-    setUserFilter(e);
-    if (e) {
+  const userFilterHandler = (userId: any) => {
+    setUserFilter(userId);
+    if (userId) {
       const newTaskList = tasks.filter((task: any) => {
-        return task.user === e;
+        return task.user === userId;
       });
       setUserFilterResults(newTaskList);
     } else {
@@ -116,6 +116,8 @@ function App() {
       return userFilterResults;
     } else if (searchTerm.length < 1 && !userFilter) {
       return isCompleteResults;
+    } else {
+      return tasks;
     }
   };
 
