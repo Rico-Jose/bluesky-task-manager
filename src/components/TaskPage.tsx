@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownFilter from './DropdownFilter';
 import TaskTable from './TaskTable';
+import AddTask from '../AddTask';
 import Button from '@material-ui/core/Button';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
@@ -10,6 +11,7 @@ import { green } from '@material-ui/core/colors';
 const TaskPage = (props: any) => {
   const inputElement = useRef<any>('');
   const [isComplete, setIsComplete] = useState(props.isCompleteFilter);
+  const [openAddTask, setOpenAddTask] = useState(false);
 
   //  Pass task id to parent component
   const deleteTaskHandler = (id: any) => {
@@ -30,6 +32,17 @@ const TaskPage = (props: any) => {
   //  Pass value to parent component
   const userFilterHandler = (id: any) => {
     props.getUserFilter(id);
+  };
+
+  const handleClickOpen = () => {
+    setOpenAddTask(true);
+  };
+
+  const handleCloseAddTask = (isAdd: boolean) => {
+    setOpenAddTask(false);
+    // if (isAdd) {
+
+    // }
   };
 
   return (
@@ -84,6 +97,10 @@ const TaskPage = (props: any) => {
             Add Task
           </Button>
         </Link>
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          Open dialog
+        </Button>
+        <AddTask openAddTask={openAddTask} onClose={handleCloseAddTask} />
       </div>
     </main>
   );
