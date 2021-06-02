@@ -1,107 +1,111 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useData } from './UsersContext';
 import UsersDropdown from './UsersDropdown';
-import { Grid, Paper, TextField } from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles';
+import {
+  Button,
+  Dialog,
+  TextField,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
 
-const AddTask = (props: any) => {
-  const paperStyle = {
-    padding: 20,
-    height: '70vh',
-    width: 380,
-    margin: '20px auto',
-  };
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      margin: 0,
+      padding: theme.spacing(2),
+    },
+    closeButton: {
+      position: 'absolute',
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: theme.palette.grey[500],
+    },
+  });
 
-  const btnStyle = { margin: '8px 0' };
+export interface DialogTitleProps extends WithStyles<typeof styles> {
+  id: string;
+  children: React.ReactNode;
+  onClose: () => void;
+}
 
-  const [name, setName] = useState('');
-  const [user, setUser] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
+const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
 
-  const add = (e: any) => {
-    //  Don't refresh page
-    e.preventDefault();
+const DialogContent = withStyles((theme: Theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
 
-    const task = {
-      name: name,
-      user: user,
-      isComplete: isComplete,
-    };
+const DialogActions = withStyles((theme: Theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 
-    //  Pass data to parent component
-    props.addTaskHandler(task);
+export default function AddTask(props: any) {
+  const users = useData();
 
-    //  Reset values
-    setName('');
-    setUser('');
-    setIsComplete(false);
-
-    //  Go to back the home page
-    props.history.push('/');
-  };
-
-  const getUserId = (id: any) => {
-    setUser(id);
-  };
+  let open = props.openAddTask;
 
   return (
-    <form onSubmit={add}>
-      <Grid>
-        <Paper elevation={10} style={paperStyle}>
-          <Grid container justify="center">
-            <h2>Add Task</h2>
-          </Grid>
-          <TextField
-            label="Name"
-            placeholder="Enter name"
-            style={btnStyle}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            fullWidth
-            required
-          />
-          <UsersDropdown users={props.users} getUserId={getUserId} />
-          <FormControlLabel
-            control={
-              <Checkbox
-                color="primary"
-                checked={isComplete}
-                onChange={(e) => setIsComplete(e.currentTarget.checked)}
-              />
-            }
-            style={btnStyle}
-            label="Completed"
-          />
+    <div>
+      <Dialog
+        onClose={() => props.onClose(true)}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle
+          id="customized-dialog-title"
+          onClose={() => props.onClose(true)}
+        >
+          Add Task
+        </DialogTitle>
+        <DialogContent dividers>
+          <TextField label="Name" placeholder="Enter name" fullWidth required />
+          <UsersDropdown users={users} />
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={() => props.onClose(false)}>
+            Cancel
+          </Button>
           <Button
-            type="submit"
-            color="primary"
             variant="contained"
-            style={btnStyle}
-            fullWidth
+            autoFocus
+            onClick={() => props.onClose(true)}
+            color="primary"
           >
             Add
           </Button>
-          <Link
-            to="/"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Button
-              type="submit"
-              variant="contained"
-              style={btnStyle}
-              fullWidth
-            >
-              Cancel
-            </Button>
-          </Link>
-        </Paper>
-      </Grid>
-    </form>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
-};
-
-export default AddTask;
+}

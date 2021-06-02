@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './tests/App';
 import * as serviceWorker from './serviceWorker';
-import {makeServer} from './Server/server'
+import { makeServer } from './Server/server';
 
-const server = makeServer()
-console.log(server) 
+const server = makeServer();
+console.log(server);
 
 ReactDOM.render(
   <React.StrictMode>

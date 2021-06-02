@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import { UsersProvider } from './components/UsersContext';
 import Header from './components/Header';
 import TaskPage from './components/TaskPage';
-import AddTask from './components/AddTask';
+import AddTask from './AddTask';
 import EditTask from './components/EditTask';
 import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -139,51 +140,53 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <div className="container">
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={(props) => (
-                <TaskPage
-                  {...props}
-                  tasks={combinedFilters()}
-                  getTaskId={deleteTaskHandler}
-                  term={searchTerm}
-                  searchKeyword={searchHandler}
-                  isCompleteFilter={isCompleteButton}
-                  getFilter={buttonHandler}
-                  users={users}
-                  getUserFilter={userFilterHandler}
-                />
-              )}
-            />
-            <Route
-              path="/add"
-              render={(props) => (
-                <AddTask
-                  {...props}
-                  addTaskHandler={addTaskHandler}
-                  users={users}
-                />
-              )}
-            />
-            <Route
-              path="/edit"
-              render={(props) => (
-                <EditTask
-                  {...props}
-                  editTaskHandler={editTaskHandler}
-                  users={users}
-                />
-              )}
-            />
-            <Route path="/task/:id" component={TaskDetail} />
-          </Switch>
-        </div>
-      </Router>
+      <UsersProvider>
+        <Router>
+          <Header />
+          <div className="container">
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={(props) => (
+                  <TaskPage
+                    {...props}
+                    tasks={combinedFilters()}
+                    getTaskId={deleteTaskHandler}
+                    term={searchTerm}
+                    searchKeyword={searchHandler}
+                    isCompleteFilter={isCompleteButton}
+                    getFilter={buttonHandler}
+                    users={users}
+                    getUserFilter={userFilterHandler}
+                  />
+                )}
+              />
+              <Route
+                path="/add"
+                render={(props) => (
+                  <AddTask
+                    {...props}
+                    addTaskHandler={addTaskHandler}
+                    users={users}
+                  />
+                )}
+              />
+              <Route
+                path="/edit"
+                render={(props) => (
+                  <EditTask
+                    {...props}
+                    editTaskHandler={editTaskHandler}
+                    users={users}
+                  />
+                )}
+              />
+              <Route path="/task/:id" component={TaskDetail} />
+            </Switch>
+          </div>
+        </Router>
+      </UsersProvider>
     </div>
   );
 }

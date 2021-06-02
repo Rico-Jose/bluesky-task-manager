@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownFilter from './DropdownFilter';
 import TaskTable from './TaskTable';
-import AddTask from '../AddTask';
+import AddTask from './AddTask';
 import Button from '@material-ui/core/Button';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
@@ -35,14 +35,15 @@ const TaskPage = (props: any) => {
   };
 
   const handleClickOpen = () => {
+    console.log('handleClickOpen');
     setOpenAddTask(true);
   };
 
   const handleCloseAddTask = (isAdd: boolean) => {
     setOpenAddTask(false);
-    // if (isAdd) {
-
-    // }
+    console.log(isAdd);
+    if (isAdd) {
+    }
   };
 
   return (
