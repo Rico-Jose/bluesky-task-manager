@@ -17,6 +17,7 @@ export function TaskProvider({ children }: any) {
     const response = await axios.get('api/todos');
     return response.data.todos;
   };
+
   //  Run the hook on mount
   useEffect(() => {
     const getAllTasks = async () => {
@@ -26,4 +27,10 @@ export function TaskProvider({ children }: any) {
 
     getAllTasks();
   }, []);
+
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
+
+  return <TaskContext.Provider value={tasks}>{children}</TaskContext.Provider>;
 }

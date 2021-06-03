@@ -1,5 +1,10 @@
 import React from 'react';
+import { TaskProvider } from '../contexts/TaskContext';
 
 export default function App() {
-  return <h2>Hellos</h2>;
+  return (
+    <TaskProvider>
+      <h2>Hellos</h2>
+    </TaskProvider>
+  );
 }
