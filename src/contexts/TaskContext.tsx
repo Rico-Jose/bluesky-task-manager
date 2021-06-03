@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const TaskContext = React.createContext([]);
 
-// Custom hook
+//  Custom hook
+//  Expose this so other components can access TaskProvider
 export function useTask() {
   return useContext(TaskContext);
 }
@@ -27,10 +28,6 @@ export function TaskProvider({ children }: any) {
 
     getAllTasks();
   }, []);
-
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
 
   return <TaskContext.Provider value={tasks}>{children}</TaskContext.Provider>;
 }

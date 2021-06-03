@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const UserContext = React.createContext([]);
 
-// Custom hook
+//  Custom hook
+//  Expose this so other components can access TaskProvider
 export function useUser() {
   return useContext(UserContext);
 }

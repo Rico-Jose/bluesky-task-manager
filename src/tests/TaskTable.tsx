@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useTask } from '../contexts/TaskContext';
 import {
   withStyles,
   Theme,
@@ -12,6 +13,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { green, red } from '@material-ui/core/colors';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -41,8 +46,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TaskTable(props: any) {
+export default function TaskTable() {
   const classes = useStyles();
+
+  const tasks = useTask();
+
+  console.log(tasks);
 
   return (
     <TableContainer component={Paper}>
@@ -55,7 +64,25 @@ export default function TaskTable(props: any) {
             <StyledTableCell align="right">Actions</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody></TableBody>
+        <TableBody>
+          {tasks.map((task: any) => (
+            <StyledTableRow key={task.name}>
+              <StyledTableCell component="th" scope="row">
+                {task.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{task.user}</StyledTableCell>
+              <StyledTableCell align="right">
+                {task.isComplete && (
+                  <CheckCircleIcon style={{ color: green[500] }} />
+                )}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                <EditIcon />
+                <DeleteForeverIcon style={{ color: red[700] }} />
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
       </Table>
     </TableContainer>
   );
