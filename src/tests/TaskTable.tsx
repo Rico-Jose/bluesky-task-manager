@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTask } from '../contexts/TaskContext';
+import { useUser } from '../contexts/UserContext';
 import {
   withStyles,
   Theme,
@@ -46,12 +47,31 @@ const useStyles = makeStyles({
   },
 });
 
+interface t {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
 export default function TaskTable() {
   const classes = useStyles();
-
   const tasks = useTask();
+  const users = useUser();
 
+  console.log('users');
+  console.log('tasks');
+  console.log(users);
   console.log(tasks);
+  const ta = { id: '1', firstName: 'hey', lastName: 'asdf' };
+
+  // remove t, users[0], ta
+  const getUserName = (id: any): t => {
+    return (
+      users.find((user: any) => {
+        return user.id === id;
+      }) || ta
+    );
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -70,7 +90,9 @@ export default function TaskTable() {
               <StyledTableCell component="th" scope="row">
                 {task.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{task.user}</StyledTableCell>
+              <StyledTableCell align="right">
+                {getUserName(task.user).firstName}
+              </StyledTableCell>
               <StyledTableCell align="right">
                 {task.isComplete && (
                   <CheckCircleIcon style={{ color: green[500] }} />
