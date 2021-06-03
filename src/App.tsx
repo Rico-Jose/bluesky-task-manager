@@ -4,7 +4,7 @@ import axios from 'axios';
 import { UsersProvider } from './components/UsersContext';
 import Header from './components/Header';
 import TaskPage from './components/TaskPage';
-import AddTask from './AddTask';
+import AddTask from './components/AddTask';
 import EditTask from './components/EditTask';
 import TaskDetail from './components/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
