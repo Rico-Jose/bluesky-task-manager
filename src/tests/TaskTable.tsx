@@ -58,10 +58,6 @@ export default function TaskTable() {
   const tasks = useTask();
   const users = useUser();
 
-  console.log('users');
-  console.log('tasks');
-  console.log(users);
-  console.log(tasks);
   const ta = { id: '1', firstName: 'hey', lastName: 'asdf' };
 
   // remove t, users[0], ta

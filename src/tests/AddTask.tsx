@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import UsersDropdown from './UsersDropdown';
+import { useAddTask } from '../contexts/TaskContext';
 import {
   createStyles,
   Theme,
@@ -11,6 +13,8 @@ import {
   TextField,
   IconButton,
   Typography,
+  FormControlLabel,
+  Checkbox,
 } from '@material-ui/core';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -70,6 +74,34 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 export default function AddTask(props: any) {
   let open = props.openAddTask;
+  const addTask = useAddTask();
+  const [name, setName] = useState('');
+  const [user, setUser] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
+
+  const getUserId = (id: any) => {
+    setUser(id);
+  };
+
+  const handleClick = () => {
+    if (name) {
+      const task = {
+        name: name,
+        user: user,
+        isComplete: isComplete,
+      };
+
+      addTask(task);
+
+      console.log(user);
+
+      //  Reset values
+      setName('');
+      setIsComplete(false);
+
+      props.onClose(true);
+    }
+  };
 
   return (
     <Dialog
@@ -84,7 +116,24 @@ export default function AddTask(props: any) {
         Add Task
       </DialogTitle>
       <DialogContent dividers>
-        <TextField label="Name" placeholder="Enter name" fullWidth required />
+        <TextField
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          label="Name"
+          placeholder="Enter name"
+          fullWidth
+        />
+        <UsersDropdown getUserId={getUserId} />
+        <FormControlLabel
+          control={
+            <Checkbox
+              color="primary"
+              checked={isComplete}
+              onChange={(e) => setIsComplete(e.currentTarget.checked)}
+            />
+          }
+          label="Completed"
+        />
       </DialogContent>
       <DialogActions>
         <Button variant="contained" onClick={() => props.onClose(false)}>
@@ -93,7 +142,7 @@ export default function AddTask(props: any) {
         <Button
           variant="contained"
           autoFocus
-          onClick={() => props.onClose(true)}
+          onClick={handleClick}
           color="primary"
         >
           Add
