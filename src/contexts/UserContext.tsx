@@ -28,5 +28,9 @@ export function UserProvider({ children }: any) {
     getAllUsers();
   }, []);
 
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
   return <UserContext.Provider value={users}>{children}</UserContext.Provider>;
 }
