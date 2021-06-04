@@ -5,9 +5,33 @@ import Header from '../tests/Header';
 import PageHeader from '../tests/PageHeader';
 import TaskTable from '../tests/TaskTable';
 import AddTask from '../tests/AddTask';
-import { CssBaseline, makeStyles, Button } from '@material-ui/core';
+import {
+  CssBaseline,
+  makeStyles,
+  Button,
+  createMuiTheme,
+} from '@material-ui/core';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 //  import 'bootstrap/dist/css/bootstrap.min.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#333996',
+      light: '#3c44b126',
+    },
+    secondary: {
+      main: '#f83245',
+      light: 'f8324526',
+    },
+    background: {
+      default: '#f4f5fd',
+    },
+  },
+  /* shape: {
+    borderRadius: '12px',
+  }, */
+});
 
 const useStyles = makeStyles({
   appMain: {
