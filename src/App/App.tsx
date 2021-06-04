@@ -56,7 +56,9 @@ function App() {
     <>
       <div className={classes.appMain}>
         <Header />
-        <Tasks />
+        <UserProvider>
+          <Tasks />
+        </UserProvider>
         {/* <TaskProvider>
           <UserProvider>
             <div className="container">
