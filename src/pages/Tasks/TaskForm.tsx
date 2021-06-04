@@ -22,7 +22,7 @@ export default function TaskForm() {
     return Object.values(temp).every((x) => x == '');
   };
 
-  const { values, setValues, errors, setErrors, handleInputChange } =
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFieldValues);
   const users: any = useUser();
 
@@ -60,7 +60,7 @@ export default function TaskForm() {
           />
           <div>
             <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" />
+            <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
         </Grid>
       </Grid>
