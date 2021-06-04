@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import DeleteAlert from './DeleteAlert';
-import DeleteSuccessSnackbar from './DeleteSuccessSnackbar';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useTask } from '../contexts/TaskContext';
+import { useUser } from '../contexts/UserContext';
 import {
   withStyles,
   Theme,
@@ -48,36 +47,26 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TaskTable(props: any) {
+interface t {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+export default function TaskTable() {
   const classes = useStyles();
+  const tasks = useTask();
+  const users = useUser();
 
-  const [openAlert, setOpenAlert] = useState(false);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [taskId, setTaskId] = useState('');
+  const ta = { id: '1', firstName: 'hey', lastName: 'asdf' };
 
-  const getUserName = (id: any) => {
-    return props.users.length > 0
-      ? props.users.find((user: any) => {
-          return user.id === id;
-        })
-      : '';
-  };
-
-  const handleClickOpen = (taskId: string) => {
-    setTaskId(taskId);
-    setOpenAlert(true);
-  };
-
-  const handleCloseAlert = (isDelete: boolean) => {
-    setOpenAlert(false);
-    if (isDelete) {
-      props.getTaskId(taskId);
-      setOpenSnackbar(true);
-    }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
+  // remove t, users[0], ta
+  const getUserName = (id: any): t => {
+    return (
+      users.find((user: any) => {
+        return user.id === id;
+      }) || ta
+    );
   };
 
   return (
@@ -92,23 +81,13 @@ export default function TaskTable(props: any) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.tasks.map((task: any) => (
+          {tasks.map((task: any) => (
             <StyledTableRow key={task.name}>
               <StyledTableCell component="th" scope="row">
-                <Link
-                  to={{
-                    pathname: `/task/${task.id}`,
-                    state: { task: task },
-                  }}
-                  style={{ textDecoration: 'none' }}
-                >
-                  {task.name}
-                </Link>
+                {task.name}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {`${getUserName(task.user).firstName} ${
-                  getUserName(task.user).lastName
-                }`}
+                {getUserName(task.user).firstName}
               </StyledTableCell>
               <StyledTableCell align="right">
                 {task.isComplete && (
@@ -116,28 +95,13 @@ export default function TaskTable(props: any) {
                 )}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <Link to={{ pathname: `/edit`, state: { task: task } }}>
-                  <EditIcon />
-                </Link>
-                <DeleteForeverIcon
-                  style={{ color: red[700] }}
-                  onClick={() => handleClickOpen(task.id)}
-                />
-                <DeleteAlert open={openAlert} onClose={handleCloseAlert} />
+                <EditIcon />
+                <DeleteForeverIcon style={{ color: red[700] }} />
               </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
-      {props.tasks.length < 1 ? (
-        <h2 style={{ margin: '20px', textAlign: 'center' }}>
-          No Tasks Available
-        </h2>
-      ) : null}
-      <DeleteSuccessSnackbar
-        openSnackbar={openSnackbar}
-        onClose={handleCloseSnackbar}
-      />
     </TableContainer>
   );
 }

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useData } from './UsersContext';
+import React, { useState } from 'react';
+import { useUser } from '../contexts/UserContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -19,13 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function UsersDropdown(props: any) {
   const classes = useStyles();
-  const users = useData();
-  const [user, setUser] = React.useState('');
-
-  //  Run the hook on mount
-  useEffect(() => {
-    setUser(props.user);
-  }, []);
+  const users = useUser();
+  const [user, setUser] = useState('');
 
   const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
     setUser(event.target.value as string);
@@ -41,7 +36,6 @@ export default function UsersDropdown(props: any) {
           id="demo-simple-select"
           value={user}
           onChange={handleChange}
-          required
         >
           {users.map((user: any) => (
             <MenuItem value={user.id} key={user.id}>

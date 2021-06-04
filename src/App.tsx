@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { UsersProvider } from './components/UsersContext';
-import Header from './components/Header';
-import TaskPage from './components/TaskPage';
-import AddTask from './components/AddTask';
-import EditTask from './components/EditTask';
-import TaskDetail from './components/TaskDetail';
+import { UsersProvider } from './try/UsersContext';
+import Header from './try/Header';
+import TaskPage from './try/TaskPage';
+import AddTask from './try/AddTask';
+import EditTask from './try/EditTask';
+import TaskDetail from './try/TaskDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {

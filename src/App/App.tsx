@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { TaskProvider } from '../contexts/TaskContext';
 import { UserProvider } from '../contexts/UserContext';
-import Header from '../tests/Header';
-import PageHeader from '../tests/PageHeader';
-import TaskTable from '../tests/TaskTable';
-import AddTask from '../tests/AddTask';
+import Header from '../components/Header';
+import Tasks from '../pages/Tasks/Tasks';
+import TaskTable from '../components/TaskTable';
+import AddTask from '../components/AddTask';
 import {
   CssBaseline,
   makeStyles,
   Button,
   createMuiTheme,
 } from '@material-ui/core';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 //  import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = createMuiTheme({
@@ -57,12 +56,8 @@ function App() {
     <>
       <div className={classes.appMain}>
         <Header />
-        <PageHeader
-          title="Page Header"
-          subTitle="Page description"
-          icon={<FormatListBulletedIcon fontSize="large" />}
-        />
-        <TaskProvider>
+        <Tasks />
+        {/* <TaskProvider>
           <UserProvider>
             <div className="container">
               <main>
@@ -81,7 +76,7 @@ function App() {
               </main>
             </div>
           </UserProvider>
-        </TaskProvider>
+        </TaskProvider> */}
         <CssBaseline />
       </div>
     </>
