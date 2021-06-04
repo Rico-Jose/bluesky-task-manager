@@ -34,6 +34,12 @@ export default function TaskForm() {
             onChange={handleInputChange}
             options={users}
           />
+          <Controls.Checkbox
+            name="isComplete"
+            label="Completed"
+            value={values.isComplete}
+            onChange={handleInputChange}
+          />
         </Grid>
       </Grid>
     </Form>
