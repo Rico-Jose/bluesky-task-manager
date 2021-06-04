@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { TaskProvider } from '../contexts/TaskContext';
 import { UserProvider } from '../contexts/UserContext';
-import Header from './Header';
-import TaskTable from './TaskTable';
-import AddTask from './AddTask';
-import Button from '@material-ui/core/Button';
+import Header from '../tests/Header';
+import TaskTable from '../tests/TaskTable';
+import AddTask from '../tests/AddTask';
+import { Button, CssBaseline } from '@material-ui/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
@@ -38,6 +38,7 @@ export default function App() {
           </div>
         </UserProvider>
       </TaskProvider>
+      <CssBaseline />
     </div>
   );
 }
