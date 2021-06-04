@@ -4,10 +4,19 @@ import { UserProvider } from '../contexts/UserContext';
 import Header from '../tests/Header';
 import TaskTable from '../tests/TaskTable';
 import AddTask from '../tests/AddTask';
-import { Button, CssBaseline } from '@material-ui/core';
+import { CssBaseline, makeStyles, Button } from '@material-ui/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function App() {
+const useStyles = makeStyles({
+  appMain: {
+    /* paddingLeft: '320px', */
+    width: '100%',
+  },
+});
+
+function App() {
+  const classes = useStyles();
+
   const [openAddTask, setOpenAddTask] = useState(false);
 
   const handleClickOpenAddTask = () => {
@@ -19,26 +28,33 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <TaskProvider>
-        <UserProvider>
-          <div className="container">
-            <main>
-              <TaskTable />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleClickOpenAddTask}
-              >
-                Add Task
-              </Button>
-              <AddTask openAddTask={openAddTask} onClose={handleCloseAddTask} />
-            </main>
-          </div>
-        </UserProvider>
-      </TaskProvider>
-      <CssBaseline />
-    </div>
+    <>
+      <div className={classes.appMain}>
+        <Header />
+        <TaskProvider>
+          <UserProvider>
+            <div className="container">
+              <main>
+                <TaskTable />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleClickOpenAddTask}
+                >
+                  Add Task
+                </Button>
+                <AddTask
+                  openAddTask={openAddTask}
+                  onClose={handleCloseAddTask}
+                />
+              </main>
+            </div>
+          </UserProvider>
+        </TaskProvider>
+        <CssBaseline />
+      </div>
+    </>
   );
 }
+
+export default App;
