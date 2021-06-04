@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, Form } from '../../components/useForm';
-import { Grid, TextField, makeStyles } from '@material-ui/core';
+import Input from '../../components/controls/Input';
+import { Grid } from '@material-ui/core';
 
 const initialFieldValues = {
   id: '0',
@@ -16,10 +17,9 @@ export default function TaskForm() {
     <Form>
       <Grid container>
         <Grid item xs={6}>
-          <TextField
-            variant="outlined"
-            label="Name"
+          <Input
             name="name"
+            label="Name"
             value={values.name}
             onChange={handleInputChange}
           />
