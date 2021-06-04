@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function useTable(tasks: any, headCells: any) {
+export default function useTable(tasks: any, headCells: any, filterFn: any) {
   const classes = useStyles();
   const pages = [5, 10, 25];
   const [page, setPage] = useState(0);
@@ -70,7 +70,9 @@ export default function useTable(tasks: any, headCells: any) {
   );
 
   const tasksAfterPaging = () => {
-    return tasks.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
+    return filterFn
+      .fn(tasks)
+      .slice(page * rowsPerPage, (page + 1) * rowsPerPage);
   };
 
   return {
