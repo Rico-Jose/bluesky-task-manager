@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 
 export function useForm(initialFieldValues: any) {
   const [values, setValues] = useState(initialFieldValues);
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -12,7 +13,7 @@ export function useForm(initialFieldValues: any) {
     });
   };
 
-  return { values, setValues, handleInputChange };
+  return { values, setValues, errors, setErrors, handleInputChange };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
 
 export function Form(props: any) {
   const classes = useStyles();
+  const { children, ...other } = props;
 
   return (
-    <form className={classes.root} autoComplete="off">
+    <form className={classes.root} autoComplete="off" {...other}>
       {props.children}
     </form>
   );

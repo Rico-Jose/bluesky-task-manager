@@ -12,11 +12,28 @@ const initialFieldValues = {
 };
 
 export default function TaskForm() {
-  const { values, setValues, handleInputChange } = useForm(initialFieldValues);
+  const validate = () => {
+    let temp: any = {};
+    temp.name = values.name ? '' : 'This field is required.';
+    temp.user = values.user ? '' : 'This field is required.';
+    setErrors({
+      ...temp,
+    });
+
+    // Array.proptotype.every()
+    return Object.values(temp).every((x) => x == '');
+  };
+  const { values, setValues, errors, setErrors, handleInputChange } =
+    useForm(initialFieldValues);
   const users = useUser();
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (validate()) window.alert('testing...');
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input
