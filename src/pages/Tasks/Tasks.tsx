@@ -20,11 +20,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const headCells = [
+  { id: 'name', label: 'Name' },
+  { id: 'user', label: 'User' },
+];
+
 export default function Tasks() {
   const classes = useStyles();
-  const { TblContainer } = useTable();
   const tasks = useTask();
   const users = useUser();
+  const { TblContainer, TblHead, TblPagination, tasksAfterPaging } = useTable(
+    tasks,
+    headCells
+  );
 
   const getUserName = (id: any): any => {
     return users.find((user: any) => {
@@ -40,10 +48,11 @@ export default function Tasks() {
         icon={<FormatListBulletedIcon fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        <TaskForm />
+        {/* <TaskForm /> */}
         <TblContainer>
+          <TblHead />
           <TableBody>
-            {tasks.map((item: any) => (
+            {tasksAfterPaging().map((item: any) => (
               <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{getUserName(item.user).firstName}</TableCell>
@@ -51,6 +60,7 @@ export default function Tasks() {
             ))}
           </TableBody>
         </TblContainer>
+        <TblPagination />
       </Paper>
     </>
   );

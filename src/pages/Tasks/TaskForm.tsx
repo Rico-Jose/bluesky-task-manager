@@ -24,7 +24,7 @@ export default function TaskForm() {
 
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFieldValues);
-  const users: any = useUser();
+  const users = useUser();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
