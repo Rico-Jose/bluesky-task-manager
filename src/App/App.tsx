@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { TaskProvider } from '../contexts/TaskContext';
 import { UserProvider } from '../contexts/UserContext';
 import Header from '../tests/Header';
+import PageHeader from '../tests/PageHeader';
 import TaskTable from '../tests/TaskTable';
 import AddTask from '../tests/AddTask';
 import { CssBaseline, makeStyles, Button } from '@material-ui/core';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+//  import 'bootstrap/dist/css/bootstrap.min.css';
 
 const useStyles = makeStyles({
   appMain: {
@@ -31,6 +33,11 @@ function App() {
     <>
       <div className={classes.appMain}>
         <Header />
+        <PageHeader
+          title="Page Header"
+          subTitle="Page description"
+          icon={<FormatListBulletedIcon fontSize="large" />}
+        />
         <TaskProvider>
           <UserProvider>
             <div className="container">
