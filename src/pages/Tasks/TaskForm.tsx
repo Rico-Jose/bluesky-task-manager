@@ -16,16 +16,15 @@ export default function TaskForm() {
     let temp: any = {};
     temp.name = values.name ? '' : 'This field is required.';
     temp.user = values.user ? '' : 'This field is required.';
-    setErrors({
-      ...temp,
-    });
+    setErrors({ ...temp });
 
     // Array.proptotype.every()
     return Object.values(temp).every((x) => x == '');
   };
+
   const { values, setValues, errors, setErrors, handleInputChange } =
     useForm(initialFieldValues);
-  const users = useUser();
+  const users: any = useUser();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -41,6 +40,7 @@ export default function TaskForm() {
             label="Name"
             value={values.name}
             onChange={handleInputChange}
+            error={errors.name}
           />
         </Grid>
         <Grid item xs={6}>
@@ -50,6 +50,7 @@ export default function TaskForm() {
             value={values.user}
             onChange={handleInputChange}
             options={users}
+            error={errors.user}
           />
           <Controls.Checkbox
             name="isComplete"
