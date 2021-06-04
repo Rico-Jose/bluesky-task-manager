@@ -7,6 +7,9 @@ import {
 
 export default function Checkbox(props: any) {
   const { name, label, value, onChange } = props;
+  const convertToDefEventParam = (name: any, value: any) => ({
+    target: { name, value },
+  });
 
   return (
     <FormControl>
@@ -17,7 +20,9 @@ export default function Checkbox(props: any) {
             name={name}
             color="primary"
             checked={value}
-            onChange={onChange}
+            onChange={(e) =>
+              onChange(convertToDefEventParam(name, e.target.checked))
+            }
           />
         }
       />
