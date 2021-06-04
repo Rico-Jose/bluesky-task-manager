@@ -5,6 +5,7 @@ import PageHeader from '../../components/PageHeader';
 import TaskForm from './TaskForm';
 import Controls from '../../components/controls/Controls';
 import useTable from '../../components/useTable';
+import Popup from '../../components/Popup';
 import {
   Paper,
   TableBody,
@@ -16,6 +17,7 @@ import {
 } from '@material-ui/core';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import Search from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -24,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
   searchInput: {
     width: '75%',
+  },
+  newButton: {
+    position: 'absolute',
+    right: '10px',
   },
 }));
 
@@ -36,6 +42,7 @@ export default function Tasks() {
   const classes = useStyles();
   const tasks = useTask();
   const users = useUser();
+  const [openPopup, setOpenPopup] = useState(false);
   const [filterFn, setFilterFn] = useState({
     fn: (items: any) => {
       return items;
@@ -74,11 +81,11 @@ export default function Tasks() {
         icon={<FormatListBulletedIcon fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        {/* <TaskForm /> */}
+        <TaskForm />
         <Toolbar>
           <Controls.Input
-            label="Search Tasks"
             classeName={classes.searchInput}
+            label="Search Tasks"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -87,6 +94,13 @@ export default function Tasks() {
               ),
             }}
             onChange={handleSearch}
+          />
+          <Controls.Button
+            text="Add New"
+            variant="outlined"
+            startIcon={<AddIcon />}
+            classeName={classes.newButton}
+            onClick={() => setOpenPopup(true)}
           />
         </Toolbar>
         <TblContainer>
@@ -102,6 +116,7 @@ export default function Tasks() {
         </TblContainer>
         <TblPagination />
       </Paper>
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
     </>
   );
 }
