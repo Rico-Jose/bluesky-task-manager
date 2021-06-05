@@ -10,6 +10,7 @@ import {
   makeStyles,
   Button,
   createMuiTheme,
+  ThemeProvider,
 } from '@material-ui/core';
 //  import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -53,7 +54,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <div className={classes.appMain}>
         <Header />
         <TaskProvider>
@@ -83,7 +84,7 @@ function App() {
         </TaskProvider> */}
         <CssBaseline />
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 

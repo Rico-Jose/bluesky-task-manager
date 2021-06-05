@@ -46,7 +46,6 @@ export function TaskProvider({ children }: any) {
 
   //  Add task
   const addTask = async (task: any) => {
-    console.log(task);
     //  POST api/todo/create
     const response = await axios.post('api/todo/create', { task });
     //  Add new task to the UI
@@ -77,10 +76,6 @@ export function TaskProvider({ children }: any) {
       })
     );
   };
-
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
 
   return (
     <TaskContext.Provider value={tasks}>

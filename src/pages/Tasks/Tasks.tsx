@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useTask,
   useAddTask,
@@ -21,6 +21,7 @@ import {
   Toolbar,
   InputAdornment,
   makeStyles,
+  Grid,
 } from '@material-ui/core';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import Search from '@material-ui/icons/Search';
@@ -28,6 +29,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -58,6 +60,7 @@ export default function Tasks() {
   const editTask = useEditTask();
   const deleteTask = useDeleteTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [user, setUser] = useState('');
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: '',
@@ -90,14 +93,30 @@ export default function Tasks() {
   };
 
   const handleSearch = (e: any) => {
-    let target = e.target;
+    let target = e.target.value;
     setFilterFn({
       fn: (items: any) => {
-        if (target.value == '') return items;
-        else
+        if (!target) {
+          return items;
+        } else {
           return items.filter((x: any) =>
-            x.name.toLowerCase().includes(target.value)
+            x.name.toLowerCase().includes(target)
           );
+        }
+      },
+    });
+  };
+
+  const handleFilterByUser = (e: any) => {
+    let target = e.target.value;
+    setUser(target);
+    setFilterFn({
+      fn: (items: any) => {
+        if (!target) {
+          return items;
+        } else {
+          return items.filter((x: any) => x.user === target);
+        }
       },
     });
   };
@@ -133,6 +152,10 @@ export default function Tasks() {
     });
   };
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <>
       <PageHeader
@@ -142,28 +165,44 @@ export default function Tasks() {
       />
       <Paper className={classes.pageContent}>
         <Toolbar>
-          <Controls.Input
-            className={classes.searchInput}
-            label="Search Tasks"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-            onChange={handleSearch}
-          />
-          <Controls.Button
-            text="Add New"
-            variant="outlined"
-            startIcon={<AddIcon />}
-            className={classes.newButton}
-            onClick={() => {
-              setOpenPopup(true);
-              setTaskToEdit(null);
-            }}
-          />
+          <Grid container>
+            <Grid item xs={4}>
+              <Controls.Input
+                className={classes.searchInput}
+                label="Search Tasks"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={handleSearch}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Controls.Select
+                name="user"
+                label="User"
+                value={user}
+                onChange={handleFilterByUser}
+                options={users}
+              />
+            </Grid>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={2}>
+              <Controls.Button
+                text="Add New"
+                variant="outlined"
+                startIcon={<AddIcon />}
+                className={classes.newButton}
+                onClick={() => {
+                  setOpenPopup(true);
+                  setTaskToEdit(null);
+                }}
+              />
+            </Grid>
+          </Grid>
         </Toolbar>
         <TblContainer>
           <TblHead />
@@ -176,7 +215,9 @@ export default function Tasks() {
                   {getUsername(task.user).lastName}
                 </TableCell>
                 <TableCell>
-                  {task.isComplete && <CheckCircleIcon fontSize="small" />}
+                  {task.isComplete && (
+                    <CheckCircleIcon style={{ color: green[500] }} />
+                  )}
                 </TableCell>
                 <TableCell>
                   <Controls.ActionButton
