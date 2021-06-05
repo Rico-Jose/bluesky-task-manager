@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTask } from '../../contexts/TaskContext';
+import { useTask, useAddTask, useEditTask } from '../../contexts/TaskContext';
 import { useUser } from '../../contexts/UserContext';
 import PageHeader from '../../components/PageHeader';
 import TaskForm from './TaskForm';
@@ -18,6 +18,9 @@ import {
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import Search from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -36,12 +39,17 @@ const useStyles = makeStyles((theme) => ({
 const headCells = [
   { id: 'name', label: 'Name' },
   { id: 'user', label: 'User' },
+  { id: 'isComplete', label: 'Completed' },
+  { id: 'actions', label: 'Actions' },
 ];
 
 export default function Tasks() {
   const classes = useStyles();
   const tasks = useTask();
   const users = useUser();
+  const addTask = useAddTask();
+  const editTask = useEditTask();
+  const [taskToEdit, setTaskToEdit] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
   const [filterFn, setFilterFn] = useState({
     fn: (items: any) => {
@@ -73,6 +81,19 @@ export default function Tasks() {
     });
   };
 
+  const addOrEdit = (task: any, resetForm: any) => {
+    if (!task.id) addTask(task);
+    else editTask(task);
+    resetForm();
+    setTaskToEdit(null);
+    setOpenPopup(false);
+  };
+
+  const openInPopup = (task: any) => {
+    setTaskToEdit(task);
+    setOpenPopup(true);
+  };
+
   return (
     <>
       <PageHeader
@@ -99,16 +120,38 @@ export default function Tasks() {
             variant="outlined"
             startIcon={<AddIcon />}
             className={classes.newButton}
-            onClick={() => setOpenPopup(true)}
+            onClick={() => {
+              setOpenPopup(true);
+              setTaskToEdit(null);
+            }}
           />
         </Toolbar>
         <TblContainer>
           <TblHead />
           <TableBody>
-            {tasksAfterPaging().map((item: any) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{getUsername(item.user).firstName}</TableCell>
+            {tasksAfterPaging().map((task: any) => (
+              <TableRow key={task.id}>
+                <TableCell>{task.name}</TableCell>
+                <TableCell>
+                  {getUsername(task.user).firstName}{' '}
+                  {getUsername(task.user).lastName}
+                </TableCell>
+                <TableCell>
+                  {task.isComplete && <CheckCircleIcon fontSize="small" />}
+                </TableCell>
+                <TableCell>
+                  <Controls.ActionButton
+                    color="primary"
+                    onClick={() => {
+                      openInPopup(task);
+                    }}
+                  >
+                    <EditOutlinedIcon fontSize="small" />
+                  </Controls.ActionButton>
+                  <Controls.ActionButton color="secondary">
+                    <CloseIcon fontSize="small" />
+                  </Controls.ActionButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -120,7 +163,7 @@ export default function Tasks() {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-        <TaskForm />
+        <TaskForm taskToEdit={taskToEdit} addOrEdit={addOrEdit} />
       </Popup>
     </>
   );

@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
-import { useAddTask } from '../../contexts/TaskContext';
 import { useForm, Form } from '../../components/useForm';
 import Controls from '../../components/controls/Controls';
 import { Grid } from '@material-ui/core';
 
 const initialFieldValues = {
-  /* id: '', */
+  /* id: '0', */
   name: '',
   user: '',
   isComplete: false,
 };
 
-export default function TaskForm() {
+export default function TaskForm(props: any) {
+  const { taskToEdit, addOrEdit } = props;
+
   const validate = () => {
     let temp: any = {};
     temp.name = values.name ? '' : 'This field is required.';
@@ -26,14 +27,15 @@ export default function TaskForm() {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFieldValues);
   const users = useUser();
-  const addTask = useAddTask();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (validate()) {
-      addTask(values);
-    }
+    if (validate()) addOrEdit(values, resetForm);
   };
+
+  useEffect(() => {
+    if (taskToEdit) setValues({ ...taskToEdit });
+  }, [taskToEdit]);
 
   return (
     <Form onSubmit={handleSubmit}>
