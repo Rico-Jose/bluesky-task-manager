@@ -22,6 +22,10 @@ import {
   InputAdornment,
   makeStyles,
   Grid,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Switch,
 } from '@material-ui/core';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import Search from '@material-ui/icons/Search';
@@ -29,6 +33,8 @@ import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ToggleOnIcon from '@material-ui/icons/ToggleOn';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +67,7 @@ export default function Tasks() {
   const deleteTask = useDeleteTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [user, setUser] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: '',
@@ -121,6 +128,19 @@ export default function Tasks() {
     });
   };
 
+  const handleSearchByIsComplete = () => {
+    setIsComplete(!isComplete);
+    setFilterFn({
+      fn: (items: any) => {
+        if (isComplete) {
+          return items;
+        } else {
+          return items.filter((x: any) => x.isComplete === !isComplete);
+        }
+      },
+    });
+  };
+
   const addOrEdit = (task: any, resetForm: any) => {
     if (!task.id) addTask(task);
     else editTask(task);
@@ -153,8 +173,8 @@ export default function Tasks() {
   };
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    console.log(isComplete);
+  }, [isComplete]);
 
   return (
     <>
@@ -189,7 +209,21 @@ export default function Tasks() {
                 options={users}
               />
             </Grid>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={3}>
+              <FormControl component="fieldset">
+                <FormGroup aria-label="position" row>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isComplete}
+                        onChange={handleSearchByIsComplete}
+                      />
+                    }
+                    label="Completed"
+                  />
+                </FormGroup>
+              </FormControl>
+            </Grid>
             <Grid item xs={2}>
               <Controls.Button
                 text="Add New"
