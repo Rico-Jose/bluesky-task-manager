@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useTask, useAddTask, useEditTask } from '../../contexts/TaskContext';
 import { useUser } from '../../contexts/UserContext';
-import PageHeader from '../../components/PageHeader';
 import TaskForm from './TaskForm';
+import PageHeader from '../../components/PageHeader';
 import Controls from '../../components/controls/Controls';
 import useTable from '../../components/useTable';
 import Popup from '../../components/Popup';
+import Notification from '../../components/Notification';
 import {
   Paper,
   TableBody,
@@ -50,12 +51,19 @@ export default function Tasks() {
   const addTask = useAddTask();
   const editTask = useEditTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
   const [openPopup, setOpenPopup] = useState(false);
+
   const [filterFn, setFilterFn] = useState({
     fn: (items: any) => {
       return items;
     },
   });
+
   const { TblContainer, TblHead, TblPagination, tasksAfterPaging } = useTable(
     tasks,
     headCells,
@@ -87,6 +95,11 @@ export default function Tasks() {
     resetForm();
     setTaskToEdit(null);
     setOpenPopup(false);
+    setNotify({
+      isOpen: true,
+      message: 'Submitted Successfully',
+      type: 'success',
+    });
   };
 
   const openInPopup = (task: any) => {
@@ -165,6 +178,7 @@ export default function Tasks() {
       >
         <TaskForm taskToEdit={taskToEdit} addOrEdit={addOrEdit} />
       </Popup>
+      <Notification notify={notify} setNotify={setNotify} />
     </>
   );
 }
