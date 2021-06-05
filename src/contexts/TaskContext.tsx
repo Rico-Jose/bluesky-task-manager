@@ -34,6 +34,10 @@ export function TaskProvider({ children }: any) {
     getAllTasks();
   }, []);
 
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
+
   //  Add task
   const addTask = async (task: any) => {
     //  POST api/todo/create

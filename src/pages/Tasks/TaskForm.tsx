@@ -1,11 +1,12 @@
 import React from 'react';
 import { useUser } from '../../contexts/UserContext';
+import { useAddTask } from '../../contexts/TaskContext';
 import { useForm, Form } from '../../components/useForm';
 import Controls from '../../components/controls/Controls';
 import { Grid } from '@material-ui/core';
 
 const initialFieldValues = {
-  id: '0',
+  /* id: '', */
   name: '',
   user: '',
   isComplete: false,
@@ -25,10 +26,13 @@ export default function TaskForm() {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFieldValues);
   const users = useUser();
+  const addTask = useAddTask();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (validate()) window.alert('testing...');
+    if (validate()) {
+      addTask(values);
+    }
   };
 
   return (
