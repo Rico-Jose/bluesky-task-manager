@@ -12,6 +12,7 @@ import Controls from '../../components/controls/Controls';
 import useTable from '../../components/useTable';
 import Popup from '../../components/Popup';
 import Notification from '../../components/Notification';
+import ConfirmDialog from '../../components/ConfirmDialog';
 import {
   Paper,
   TableBody,
@@ -57,6 +58,11 @@ export default function Tasks() {
   const editTask = useEditTask();
   const deleteTask = useDeleteTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: '',
+    subTitle: '',
+  });
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
@@ -180,7 +186,13 @@ export default function Tasks() {
                   </Controls.ActionButton>
                   <Controls.ActionButton
                     color="secondary"
-                    onClick={() => onDelete(task.id)}
+                    onClick={() =>
+                      setConfirmDialog({
+                        isOpen: true,
+                        title: 'Are you sure to delete this task?',
+                        subTitle: "You can't undo this operation",
+                      })
+                    }
                   >
                     <CloseIcon fontSize="small" />
                   </Controls.ActionButton>
@@ -199,6 +211,10 @@ export default function Tasks() {
         <TaskForm taskToEdit={taskToEdit} addOrEdit={addOrEdit} />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </>
   );
 }
