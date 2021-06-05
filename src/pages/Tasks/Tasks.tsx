@@ -62,6 +62,7 @@ export default function Tasks() {
     isOpen: false,
     title: '',
     subTitle: '',
+    onConfirm: () => {},
   });
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -119,15 +120,17 @@ export default function Tasks() {
     setOpenPopup(true);
   };
 
-  const onDelete = (id: any) => {
-    if (window.confirm('Are you sure to delete this task?')) {
-      deleteTask(id);
-      setNotify({
-        isOpen: true,
-        message: 'Deleted Successfully',
-        type: 'error',
-      });
-    }
+  const onDelete: any = (id: any) => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+    deleteTask(id);
+    setNotify({
+      isOpen: true,
+      message: 'Deleted Successfully',
+      type: 'error',
+    });
   };
 
   return (
@@ -191,6 +194,9 @@ export default function Tasks() {
                         isOpen: true,
                         title: 'Are you sure to delete this task?',
                         subTitle: "You can't undo this operation",
+                        onConfirm: () => {
+                          onDelete(task.id);
+                        },
                       })
                     }
                   >
