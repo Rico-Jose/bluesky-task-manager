@@ -4,6 +4,7 @@ import axios from 'axios';
 const TaskContext = React.createContext([]);
 const AddTaskContext = React.createContext((task: any) => {});
 const EditTaskContext = React.createContext((task: any) => {});
+const DeleteTaskContext = React.createContext((task: any) => {});
 
 //  Custom hook
 //  Expose this for other components to use
@@ -17,6 +18,10 @@ export function useAddTask() {
 
 export function useEditTask() {
   return useContext(EditTaskContext);
+}
+
+export function useDeleteTask() {
+  return useContext(DeleteTaskContext);
 }
 
 export function TaskProvider({ children }: any) {
@@ -61,6 +66,18 @@ export function TaskProvider({ children }: any) {
     );
   };
 
+  //  Delete task
+  const deleteTask = async (id: any) => {
+    //  DELETE api/todo/:id/delete
+    await axios.delete(`api/todo/${id}/delete`);
+    //  Delete task in UI
+    setTasks(
+      tasks.filter((task: any) => {
+        return task.id !== id;
+      })
+    );
+  };
+
   useEffect(() => {
     console.log(tasks);
   }, [tasks]);
@@ -69,7 +86,9 @@ export function TaskProvider({ children }: any) {
     <TaskContext.Provider value={tasks}>
       <AddTaskContext.Provider value={addTask}>
         <EditTaskContext.Provider value={editTask}>
-          {children}
+          <DeleteTaskContext.Provider value={deleteTask}>
+            {children}
+          </DeleteTaskContext.Provider>
         </EditTaskContext.Provider>
       </AddTaskContext.Provider>
     </TaskContext.Provider>

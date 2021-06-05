@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { useTask, useAddTask, useEditTask } from '../../contexts/TaskContext';
+import {
+  useTask,
+  useAddTask,
+  useEditTask,
+  useDeleteTask,
+} from '../../contexts/TaskContext';
 import { useUser } from '../../contexts/UserContext';
 import TaskForm from './TaskForm';
 import PageHeader from '../../components/PageHeader';
@@ -50,6 +55,7 @@ export default function Tasks() {
   const users = useUser();
   const addTask = useAddTask();
   const editTask = useEditTask();
+  const deleteTask = useDeleteTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -107,6 +113,17 @@ export default function Tasks() {
     setOpenPopup(true);
   };
 
+  const onDelete = (id: any) => {
+    if (window.confirm('Are you sure to delete this task?')) {
+      deleteTask(id);
+      setNotify({
+        isOpen: true,
+        message: 'Deleted Successfully',
+        type: 'error',
+      });
+    }
+  };
+
   return (
     <>
       <PageHeader
@@ -161,7 +178,10 @@ export default function Tasks() {
                   >
                     <EditOutlinedIcon fontSize="small" />
                   </Controls.ActionButton>
-                  <Controls.ActionButton color="secondary">
+                  <Controls.ActionButton
+                    color="secondary"
+                    onClick={() => onDelete(task.id)}
+                  >
                     <CloseIcon fontSize="small" />
                   </Controls.ActionButton>
                 </TableCell>
