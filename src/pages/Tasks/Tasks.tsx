@@ -81,10 +81,9 @@ export default function Tasks() {
         icon={<FormatListBulletedIcon fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        <TaskForm />
         <Toolbar>
           <Controls.Input
-            classeName={classes.searchInput}
+            className={classes.searchInput}
             label="Search Tasks"
             InputProps={{
               startAdornment: (
@@ -99,7 +98,7 @@ export default function Tasks() {
             text="Add New"
             variant="outlined"
             startIcon={<AddIcon />}
-            classeName={classes.newButton}
+            className={classes.newButton}
             onClick={() => setOpenPopup(true)}
           />
         </Toolbar>
@@ -116,7 +115,13 @@ export default function Tasks() {
         </TblContainer>
         <TblPagination />
       </Paper>
-      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
+      <Popup
+        title="Task Form"
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+        <TaskForm />
+      </Popup>
     </>
   );
 }
