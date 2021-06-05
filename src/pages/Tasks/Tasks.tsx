@@ -33,8 +33,6 @@ import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ToggleOnIcon from '@material-ui/icons/ToggleOn';
-import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,12 +40,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(5),
     padding: theme.spacing(3),
   },
-  searchInput: {
-    width: '75%',
+  search: {
+    width: '80%',
+    margin: 8,
   },
   newButton: {
-    position: 'absolute',
-    right: '10px',
+    /* position: 'absolute', */
+    //padding: 10,
+    /* right: '10px', */
+    margin: 12,
   },
 }));
 
@@ -179,7 +180,7 @@ export default function Tasks() {
   return (
     <>
       <PageHeader
-        title="New Task"
+        title="Tasks"
         subTitle="Form design with validation"
         icon={<FormatListBulletedIcon fontSize="large" />}
       />
@@ -187,31 +188,34 @@ export default function Tasks() {
         <Toolbar>
           <Grid container>
             <Grid item xs={4}>
-              <Controls.Input
-                className={classes.searchInput}
-                label="Search Tasks"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search />
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={handleSearch}
-              />
+              <FormControl className={classes.search}>
+                <Controls.Input
+                  label="Search Tasks"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={handleSearch}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <Controls.Select
-                name="user"
-                label="User"
-                value={user}
-                onChange={handleFilterByUser}
-                options={users}
-              />
+              <FormControl className={classes.search}>
+                <Controls.Select
+                  name="user"
+                  label="User"
+                  value={user}
+                  onChange={handleFilterByUser}
+                  options={users}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <FormControl component="fieldset">
-                <FormGroup aria-label="position" row>
+              <FormControl className={classes.search}>
+                <FormGroup style={{ margin: 10 }}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -225,16 +229,17 @@ export default function Tasks() {
               </FormControl>
             </Grid>
             <Grid item xs={2}>
-              <Controls.Button
-                text="Add New"
-                variant="outlined"
-                startIcon={<AddIcon />}
-                className={classes.newButton}
-                onClick={() => {
-                  setOpenPopup(true);
-                  setTaskToEdit(null);
-                }}
-              />
+              <FormControl className={classes.newButton}>
+                <Controls.Button
+                  text="Add New"
+                  variant="outlined"
+                  startIcon={<AddIcon />}
+                  onClick={() => {
+                    setOpenPopup(true);
+                    setTaskToEdit(null);
+                  }}
+                />
+              </FormControl>
             </Grid>
           </Grid>
         </Toolbar>

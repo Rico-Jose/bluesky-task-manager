@@ -3,21 +3,17 @@ import { TaskProvider } from '../contexts/TaskContext';
 import { UserProvider } from '../contexts/UserContext';
 import Header from '../components/Header';
 import Tasks from '../pages/Tasks/Tasks';
-import TaskTable from '../components/TaskTable';
-import AddTask from '../components/AddTask';
 import {
   CssBaseline,
   makeStyles,
-  Button,
   createMuiTheme,
   ThemeProvider,
 } from '@material-ui/core';
-//  import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#333996',
+      main: '#3a5eda',
       light: '#3c44b126',
     },
     secondary: {

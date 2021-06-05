@@ -2,16 +2,16 @@ import React from 'react';
 import { Paper, Card, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: { backgroundColor: '#fdfdff' },
+  root: { backgroundColor: '#fdfdff', color: theme.palette.primary.main },
   pageHeader: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
     display: 'flex',
     marginBottom: theme.spacing(3),
   },
   pageIcon: {
     display: 'inline-block',
     padding: theme.spacing(2),
-    color: '#3c44b1',
+    color: theme.palette.primary.main,
   },
   pageTitle: {
     paddingLeft: theme.spacing(4),

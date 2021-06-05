@@ -17,11 +17,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.light,
     },
     '& tbody td': {
-      fontWeight: '300',
+      fontSize: 14,
     },
     '& tbody tr: hover': {
       backgroundColor: '#fffbf2',
       cursor: 'pointer',
+    },
+    '& .MuiTableCell-root': {
+      padding: 10,
     },
   },
 }));

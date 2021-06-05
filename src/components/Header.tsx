@@ -1,24 +1,16 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Grid,
-  Typography,
-  makeStyles,
-  InputBase,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { AppBar, Grid, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: { backgroundColor: '#fff', transform: 'translateZ(0)' },
-  searchInput: {
-    opacity: '0.6',
-    padding: `0px ${theme.spacing(1)}px`,
-    fontSize: '0.8rem',
-    '&:hover': { backgroundColor: '#f2f2f2' },
-    '& .MuiSvgIcon-root': {
-      marginRight: theme.spacing(1),
-    },
+  root: {
+    backgroundColor: '#fff',
+    transform: 'translateZ(0)',
+    padding: 10,
+    color: theme.palette.primary.main,
+  },
+  tryKo: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 }));
 
@@ -27,25 +19,18 @@ const Header = () => {
 
   return (
     <AppBar className={classes.root} position="static">
-      <Toolbar>
-        <Grid container alignItems="center">
-          <Grid item>
-            <InputBase
-              className={classes.searchInput}
-              placeholder="Search names"
-              startAdornment={<SearchIcon fontSize="small" />}
-            />
-          </Grid>
-          <Grid item></Grid>
-          <Grid item></Grid>
-          {/* <Typography variant="h4" component="h2">
+      <Grid container alignItems="center">
+        <Grid className={classes.tryKo} item>
+          <Typography variant="h4" component="h2">
             BlueSky Task Manager
-          </Typography> */}
+          </Typography>
         </Grid>
-        {/* <header style={{ margin: '20px auto' }}>
+        <Grid item></Grid>
+        <Grid item></Grid>
+      </Grid>
+      {/* <header style={{ margin: '20px auto' }}>
           <h1></h1>
         </header> */}
-      </Toolbar>
     </AppBar>
   );
 };

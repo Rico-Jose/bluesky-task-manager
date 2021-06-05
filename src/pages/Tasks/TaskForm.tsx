@@ -5,7 +5,6 @@ import Controls from '../../components/controls/Controls';
 import { Grid } from '@material-ui/core';
 
 const initialFieldValues = {
-  /* id: '0', */
   name: '',
   user: '',
   isComplete: false,
