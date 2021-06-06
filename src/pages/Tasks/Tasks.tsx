@@ -44,11 +44,14 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
     margin: 8,
   },
+  isComplete: {
+    width: '80%',
+    marginTop: 8,
+    marginLeft: 80,
+  },
   newButton: {
-    /* position: 'absolute', */
-    //padding: 10,
-    /* right: '10px', */
-    margin: 12,
+    marginTop: 12,
+    marginLeft: 80,
   },
 }));
 
@@ -182,7 +185,7 @@ export default function Tasks() {
       <PageHeader
         title="Tasks"
         subTitle="Form design with validation"
-        icon={<FormatListBulletedIcon fontSize="large" />}
+        icon={<FormatListBulletedIcon />}
       />
       <Paper className={classes.pageContent}>
         <Toolbar>
@@ -214,7 +217,7 @@ export default function Tasks() {
               </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <FormControl className={classes.search}>
+              <FormControl className={classes.isComplete}>
                 <FormGroup style={{ margin: 10 }}>
                   <FormControlLabel
                     control={
