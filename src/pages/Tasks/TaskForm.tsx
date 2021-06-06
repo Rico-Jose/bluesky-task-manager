@@ -39,6 +39,44 @@ export default function TaskForm(props: any) {
   return (
     <Form onSubmit={handleSubmit}>
       <Grid container>
+        <Controls.Input
+          name="name"
+          label="Name"
+          value={values.name}
+          onChange={handleInputChange}
+          error={errors.name}
+        />
+        <Controls.Select
+          name="user"
+          label="User"
+          value={values.user}
+          onChange={handleInputChange}
+          options={users}
+          error={errors.user}
+        />
+      </Grid>
+      <Grid container>
+        <Controls.Checkbox
+          name="isComplete"
+          label="Completed"
+          value={values.isComplete}
+          onChange={handleInputChange}
+        />
+      </Grid>
+      <Grid container>
+        <Controls.Button type="submit" text="Submit" fullWidth />
+        <Controls.Button
+          text="Reset"
+          color="default"
+          onClick={resetForm}
+          fullWidth
+        />
+      </Grid>
+    </Form>
+
+    /*  
+    <Form onSubmit={handleSubmit}>
+      <Grid container>
         <Grid item xs={6}>
           <Controls.Input
             name="name"
@@ -70,5 +108,6 @@ export default function TaskForm(props: any) {
         </Grid>
       </Grid>
     </Form>
+    */
   );
 }
