@@ -53,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 12,
     marginLeft: 80,
   },
+  tableRow: {
+    '& .MuiTableCell-body:nth-child(n + 2)': {
+      textAlign: 'center',
+    },
+  },
 }));
 
 const headCells = [
@@ -250,7 +255,7 @@ export default function Tasks() {
           <TblHead />
           <TableBody>
             {tasksAfterPaging().map((task: any) => (
-              <TableRow key={task.id}>
+              <TableRow key={task.id} className={classes.tableRow}>
                 <TableCell>{task.name}</TableCell>
                 <TableCell>
                   {getUsername(task.user).firstName}{' '}

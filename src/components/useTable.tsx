@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
       padding: 10,
     },
   },
+  /* tableCell: {
+    textAlign: 'center',
+  }, */
+  tableRow: {
+    '& .MuiTableCell-head:nth-child(n + 2)': {
+      textAlign: 'center',
+    },
+  },
 }));
 
 export default function useTable(tasks: any, headCells: any, filterFn: any) {
@@ -42,9 +50,15 @@ export default function useTable(tasks: any, headCells: any, filterFn: any) {
   const TblHead = (props: any) => {
     return (
       <TableHead>
-        <TableRow>
+        <TableRow className={classes.tableRow}>
           {headCells.map((headCell: any) => (
-            <TableCell key={headCell.id}>{headCell.label}</TableCell>
+            <TableCell
+              /* classes={{ root: classes.tableCell }} */
+              /* style={{ textAlign: 'center' }} */
+              key={headCell.id}
+            >
+              {headCell.label}
+            </TableCell>
           ))}
         </TableRow>
       </TableHead>
