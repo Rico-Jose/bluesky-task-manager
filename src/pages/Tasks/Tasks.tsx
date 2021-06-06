@@ -229,6 +229,7 @@ export default function Tasks() {
                       <Switch
                         checked={isComplete}
                         onChange={handleSearchByIsComplete}
+                        color="primary"
                       />
                     }
                     label="Completed"
