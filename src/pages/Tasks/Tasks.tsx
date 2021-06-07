@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   useTask,
   useAddTask,
@@ -26,6 +26,7 @@ import {
   FormGroup,
   FormControlLabel,
   Switch,
+  Typography,
 } from '@material-ui/core';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import Search from '@material-ui/icons/Search';
@@ -57,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTableCell-body:nth-child(n + 2)': {
       textAlign: 'center',
     },
+  },
+  noRecords: {
+    textAlign: 'center',
+    padding: theme.spacing(4),
   },
 }));
 
@@ -101,6 +106,8 @@ export default function Tasks() {
     headCells,
     filterFn
   );
+
+  console.log(tasksAfterPaging().length);
 
   const getUsername = (id: any): any => {
     return users.find((user: any) => {
@@ -181,17 +188,9 @@ export default function Tasks() {
     });
   };
 
-  useEffect(() => {
-    console.log(isComplete);
-  }, [isComplete]);
-
   return (
     <>
-      <PageHeader
-        title="Tasks"
-        subTitle="Form design with validation"
-        icon={<FormatListBulletedIcon />}
-      />
+      <PageHeader title="Tasks" icon={<FormatListBulletedIcon />} />
       <Paper className={classes.pageContent}>
         <Toolbar>
           <Grid container>
@@ -296,6 +295,11 @@ export default function Tasks() {
             ))}
           </TableBody>
         </TblContainer>
+        {!tasksAfterPaging().length && (
+          <Typography variant="h4" className={classes.noRecords}>
+            No Records Found
+          </Typography>
+        )}
         <TblPagination />
       </Paper>
       <Popup

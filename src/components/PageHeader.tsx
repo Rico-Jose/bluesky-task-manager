@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   pageTitle: {
-    paddingLeft: theme.spacing(4),
-    '& .MuiTypography-subtitle2': { opacity: '0.6' },
+    paddingLeft: theme.spacing(3),
+    paddingTop: theme.spacing(2),
   },
 }));
 
@@ -30,9 +30,6 @@ export default function PageHeader(props: any) {
         <div className={classes.pageTitle}>
           <Typography variant="h6" component="div">
             {title}
-          </Typography>
-          <Typography variant="subtitle2" component="div">
-            {subTitle}
           </Typography>
         </div>
       </div>

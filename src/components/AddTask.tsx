@@ -93,8 +93,6 @@ export default function AddTask(props: any) {
 
       addTask(task);
 
-      console.log(user);
-
       //  Reset values
       setName('');
       setIsComplete(false);

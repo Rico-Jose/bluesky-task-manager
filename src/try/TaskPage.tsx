@@ -35,13 +35,11 @@ const TaskPage = (props: any) => {
   };
 
   const handleClickOpen = () => {
-    console.log('handleClickOpen');
     setOpenAddTask(true);
   };
 
   const handleCloseAddTask = (isAdd: boolean) => {
     setOpenAddTask(false);
-    console.log(isAdd);
     if (isAdd) {
     }
   };
