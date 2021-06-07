@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppBar, Grid, Typography, makeStyles } from '@material-ui/core';
+import BlueSkyLogo from '../images/BlueSky.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -8,10 +9,18 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     color: theme.palette.primary.main,
   },
-  tryKo: {
+  item: {
+    textAlign: 'center',
+  },
+  logo: {
+    marginLeft: 15,
+    width: '40px',
+    height: '40px',
+  },
+  /* item: {
     marginLeft: 'auto',
     marginRight: 'auto',
-  },
+  }, */
 }));
 
 const Header = () => {
@@ -20,17 +29,20 @@ const Header = () => {
   return (
     <AppBar className={classes.root} position="static">
       <Grid container alignItems="center">
-        <Grid className={classes.tryKo} item>
-          <Typography variant="h4" component="h2">
+        <Grid item xs={2}>
+          <img src={BlueSkyLogo} className={classes.logo} />
+        </Grid>
+        <Grid item xs={8}>
+          <Typography
+            variant="h4"
+            component="h2"
+            style={{ textAlign: 'center' }}
+          >
             BlueSky Task Manager
           </Typography>
         </Grid>
-        <Grid item></Grid>
-        <Grid item></Grid>
+        <Grid item xs={2}></Grid>
       </Grid>
-      {/* <header style={{ margin: '20px auto' }}>
-          <h1></h1>
-        </header> */}
     </AppBar>
   );
 };

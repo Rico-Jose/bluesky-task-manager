@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TaskProvider } from '../contexts/TaskContext';
 import { UserProvider } from '../contexts/UserContext';
 import Header from '../components/Header';
@@ -24,30 +24,16 @@ const theme = createMuiTheme({
       default: '#f4f5fd',
     },
   },
-  /* shape: {
-    borderRadius: '12px',
-  }, */
 });
 
 const useStyles = makeStyles({
   appMain: {
-    /* paddingLeft: '320px', */
     width: '100%',
   },
 });
 
 function App() {
   const classes = useStyles();
-
-  const [openAddTask, setOpenAddTask] = useState(false);
-
-  const handleClickOpenAddTask = () => {
-    setOpenAddTask(true);
-  };
-
-  const handleCloseAddTask = (isAdd: boolean) => {
-    setOpenAddTask(false);
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,26 +44,6 @@ function App() {
             <Tasks />
           </UserProvider>
         </TaskProvider>
-        {/* <TaskProvider>
-          <UserProvider>
-            <div className="container">
-              <main>
-                <TaskTable />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleClickOpenAddTask}
-                >
-                  Add Task
-                </Button>
-                <AddTask
-                  openAddTask={openAddTask}
-                  onClose={handleCloseAddTask}
-                />
-              </main>
-            </div>
-          </UserProvider>
-        </TaskProvider> */}
         <CssBaseline />
       </div>
     </ThemeProvider>

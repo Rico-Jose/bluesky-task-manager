@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useTask,
   useAddTask,
@@ -82,6 +82,7 @@ export default function Tasks() {
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [user, setUser] = useState('');
   const [isComplete, setIsComplete] = useState(false);
+  const [funcName, setFuncName] = useState('');
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: '',
@@ -106,8 +107,6 @@ export default function Tasks() {
     headCells,
     filterFn
   );
-
-  console.log(tasksAfterPaging().length);
 
   const getUsername = (id: any): any => {
     return users.find((user: any) => {
@@ -171,8 +170,10 @@ export default function Tasks() {
   };
 
   const openInPopup = (task: any) => {
+    setFuncName('Update Task');
     setTaskToEdit(task);
     setOpenPopup(true);
+    setFuncName('Add Task');
   };
 
   const onDelete: any = (id: any) => {
@@ -186,6 +187,10 @@ export default function Tasks() {
       message: 'Deleted Successfully',
       type: 'error',
     });
+  };
+
+  const handleSetFuncName = (funcName: string) => {
+    setFuncName(funcName);
   };
 
   return (
@@ -302,12 +307,12 @@ export default function Tasks() {
         )}
         <TblPagination />
       </Paper>
-      <Popup
-        title="Task Form"
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-      >
-        <TaskForm taskToEdit={taskToEdit} addOrEdit={addOrEdit} />
+      <Popup title={funcName} openPopup={openPopup} setOpenPopup={setOpenPopup}>
+        <TaskForm
+          taskToEdit={taskToEdit}
+          addOrEdit={addOrEdit}
+          handleSetFuncName={handleSetFuncName}
+        />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog

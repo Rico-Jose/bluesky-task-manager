@@ -11,7 +11,7 @@ const initialFieldValues = {
 };
 
 export default function TaskForm(props: any) {
-  const { taskToEdit, addOrEdit } = props;
+  const { taskToEdit, addOrEdit, handleSetFuncName } = props;
 
   const validate = () => {
     let temp: any = {};
@@ -33,7 +33,12 @@ export default function TaskForm(props: any) {
   };
 
   useEffect(() => {
-    if (taskToEdit) setValues({ ...taskToEdit });
+    if (taskToEdit) {
+      setValues({ ...taskToEdit });
+      handleSetFuncName('Update Task');
+    } else {
+      handleSetFuncName('Add Task');
+    }
   }, [taskToEdit]);
 
   return (
@@ -73,41 +78,5 @@ export default function TaskForm(props: any) {
         />
       </Grid>
     </Form>
-
-    /*  
-    <Form onSubmit={handleSubmit}>
-      <Grid container>
-        <Grid item xs={6}>
-          <Controls.Input
-            name="name"
-            label="Name"
-            value={values.name}
-            onChange={handleInputChange}
-            error={errors.name}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Controls.Select
-            name="user"
-            label="User"
-            value={values.user}
-            onChange={handleInputChange}
-            options={users}
-            error={errors.user}
-          />
-          <Controls.Checkbox
-            name="isComplete"
-            label="Completed"
-            value={values.isComplete}
-            onChange={handleInputChange}
-          />
-          <div>
-            <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" onClick={resetForm} />
-          </div>
-        </Grid>
-      </Grid>
-    </Form>
-    */
   );
 }
