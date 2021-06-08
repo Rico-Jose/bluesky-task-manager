@@ -13,14 +13,15 @@ const initialFieldValues = {
 export default function TaskForm(props: any) {
   const { taskToEdit, addOrEdit, handleSetFuncName } = props;
 
+  //  Function for validation.
   const validate = () => {
     let temp: any = {};
     temp.name = values.name ? '' : 'This field is required.';
     temp.user = values.user ? '' : 'This field is required.';
     setErrors({ ...temp });
 
-    // Array.proptotype.every()
-    return Object.values(temp).every((x) => x == '');
+    //  The form is valid if all properties of temp object is an empty string.
+    return Object.values(temp).every((x) => x === '');
   };
 
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
@@ -28,6 +29,7 @@ export default function TaskForm(props: any) {
   const users = useUser();
 
   const handleSubmit = (e: any) => {
+    //  Don't reload the page.
     e.preventDefault();
     if (validate()) addOrEdit(values, resetForm);
   };

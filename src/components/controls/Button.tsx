@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Button(props: any) {
   const classes = useStyles();
+  //  Access the properties other than the specified ones
+  //  using the other object.
   const { text, size, color, variant, onClick, ...other } = props;
 
   return (

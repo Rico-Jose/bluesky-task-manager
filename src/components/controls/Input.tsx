@@ -12,6 +12,7 @@ export default function Input(props: any) {
       value={value}
       onChange={onChange}
       {...other}
+      //  Set error and helperText properties dynamically.
       {...(error && { error: true, helperText: error })}
     />
   );

@@ -10,6 +10,7 @@ import {
   ThemeProvider,
 } from '@material-ui/core';
 
+//  Custom theme for all components under App to use.
 const theme = createMuiTheme({
   palette: {
     primary: {

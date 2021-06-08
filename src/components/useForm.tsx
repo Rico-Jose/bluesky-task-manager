@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 
+// All components that have form can reuse this
+// over and over again.
 export function useForm(initialFieldValues: any) {
   const [values, setValues] = useState(initialFieldValues);
   const [errors, setErrors] = useState<any>({});
 
+  // Handle onChange event.
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
+    //  Update the value of respective property.
     setValues({
       ...values,
       [name]: value,
     });
   };
 
+  // Clear the fields and remove error notifications.
   const resetForm = () => {
     setValues(initialFieldValues);
     setErrors({});
