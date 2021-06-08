@@ -36,39 +36,43 @@ API's Already Implemented
 ![](./documentation/mockups.png)
 
 ### Implementation
-Retrieve tasks and users from the server
+Retrieve tasks and users from the server.
 ![](./src/images/1/1.png)
 
-Prompt the user when adding a task without the required fields
+Prompt the user when adding a task without the required fields.
 ![](./src/images/2/1.png)
 ![](./src/images/2/2.png)
-
-Required fields are filled
 ![](./src/images/2/3.png)
 
-Task added
+Required fields are filled and submitted. Added task is displayed and the user is notified.
 ![](./src/images/2/4.png)
 
-Update a task
+Update a task.
 ![](./src/images/3/1.png)
 
-Update another task
+Task is updated and the user is notified.
 ![](./src/images/3/2.png)
 
-Tasks updated
-![](./src/images/3/3.png)
-
-Task deleted
+User is asked to confirm to delete a task.
 ![](./src/images/4/1.png)
 
-Search by name
+User confirms and the task is deleted. A notification is shown.
+![](./src/images/4/2.png)
+
+Search by task name.
 ![](./src/images/5/1.png)
 
-Search by user
+Search by user.
 ![](./src/images/5/2.png)
 
-Search by isCompleted
+Search by completed.
 ![](./src/images/5/3.png)
 
-If there is no task to show
+If there is no task to show.
 ![](./src/images/6/1.png)
+
+Tasks are added to show pagination.
+![](./src/images/6/2.png)
+
+### - Global State (React Hooks and Context Providers)
+For this requirement, please refer to TaskContext.tsx and UserContext.tsx located in src/components/contexts
