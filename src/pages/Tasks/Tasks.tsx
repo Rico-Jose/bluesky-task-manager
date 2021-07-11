@@ -35,6 +35,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import green from '@material-ui/core/colors/green';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -114,47 +115,72 @@ export default function Tasks() {
     });
   };
 
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
+
   const handleSearch = (e: any) => {
-    let target = e.target.value;
+    let targetValue = e.target.value;
+    let targetType = e.target.type;
+    let type = e.type;
+    // console.log(targetValue);
+    // console.log(targetType);
+    // console.log(type);
+    if (e.type === 'click') setUser(targetValue);
+    if (targetType === 'checkbox') setIsComplete(!isComplete);
     setFilterFn({
       fn: (items: any) => {
-        if (!target) {
-          return items;
+        if (targetValue) {
+          if (type === 'change') {
+            console.log('search');
+            return items.filter((x: any) =>
+              x.name.toLowerCase().includes(targetValue)
+            );
+          } else if (type === 'click') {
+            console.log('user');
+            return items.filter((x: any) => x.user === targetValue);
+          }
         } else {
-          return items.filter((x: any) =>
-            x.name.toLowerCase().includes(target)
-          );
+          if (targetType === 'checkbox' && isComplete === false) {
+            console.log('checkbox');
+            return items.filter((x: any) => x.isComplete === !isComplete);
+          }
+          console.log('items');
+          return items;
+          //console.log('user');
+          //return _.filter(users, (x: any) => x.isComplete === !isComplete);
+          //return items.filter((x: any) => x.isComplete === !isComplete);
         }
       },
     });
   };
 
-  const handleFilterByUser = (e: any) => {
-    let target = e.target.value;
-    setUser(target);
-    setFilterFn({
-      fn: (items: any) => {
-        if (!target) {
-          return items;
-        } else {
-          return items.filter((x: any) => x.user === target);
-        }
-      },
-    });
-  };
+  // const handleFilterByUser = (e: any) => {
+  //   let value = e.target.value;
+  //   setUser(value);
+  //   setFilterFn({
+  //     fn: (items: any) => {
+  //       if (!value) {
+  //         return items;
+  //       } else {
+  //         return items.filter((x: any) => x.user === value);
+  //       }
+  //     },
+  //   });
+  // };
 
-  const handleSearchByIsComplete = () => {
-    setIsComplete(!isComplete);
-    setFilterFn({
-      fn: (items: any) => {
-        if (isComplete) {
-          return items;
-        } else {
-          return items.filter((x: any) => x.isComplete === !isComplete);
-        }
-      },
-    });
-  };
+  // const handleFilterByIsComplete = () => {
+  //   setIsComplete(!isComplete);
+  //   setFilterFn({
+  //     fn: (items: any) => {
+  //       if (isComplete) {
+  //         return items;
+  //       } else {
+  //         return items.filter((x: any) => x.isComplete === !isComplete);
+  //       }
+  //     },
+  //   });
+  // };
 
   const addOrEdit = (task: any, resetForm: any) => {
     if (!task.id) addTask(task);
@@ -220,7 +246,7 @@ export default function Tasks() {
                   name="user"
                   label="User"
                   value={user}
-                  onChange={handleFilterByUser}
+                  onChange={handleSearch}
                   options={users}
                 />
               </FormControl>
@@ -232,7 +258,7 @@ export default function Tasks() {
                     control={
                       <Switch
                         checked={isComplete}
-                        onChange={handleSearchByIsComplete}
+                        onChange={handleSearch}
                         color="primary"
                       />
                     }

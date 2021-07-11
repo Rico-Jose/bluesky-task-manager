@@ -17,10 +17,6 @@ const useStyles = makeStyles((theme) => ({
     width: '40px',
     height: '40px',
   },
-  /* item: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  }, */
 }));
 
 const Header = () => {
@@ -30,7 +26,7 @@ const Header = () => {
     <AppBar className={classes.root} position="static">
       <Grid container alignItems="center">
         <Grid item xs={2}>
-          <img src={BlueSkyLogo} className={classes.logo} />
+          <img src={BlueSkyLogo} className={classes.logo} alt="BlueSky logo" />
         </Grid>
         <Grid item xs={8}>
           <Typography

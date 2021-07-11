@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   TableHead,
@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
       padding: 10,
     },
   },
-  /* tableCell: {
-    textAlign: 'center',
-  }, */
   tableRow: {
     '& .MuiTableCell-head:nth-child(n + 2)': {
       textAlign: 'center',
@@ -47,18 +44,12 @@ export default function useTable(tasks: any, headCells: any, filterFn: any) {
     <Table className={classes.table}>{props.children}</Table>
   );
 
-  const TblHead = (props: any) => {
+  const TblHead = () => {
     return (
       <TableHead>
         <TableRow className={classes.tableRow}>
           {headCells.map((headCell: any) => (
-            <TableCell
-              /* classes={{ root: classes.tableCell }} */
-              /* style={{ textAlign: 'center' }} */
-              key={headCell.id}
-            >
-              {headCell.label}
-            </TableCell>
+            <TableCell key={headCell.id}>{headCell.label}</TableCell>
           ))}
         </TableRow>
       </TableHead>
@@ -85,6 +76,10 @@ export default function useTable(tasks: any, headCells: any, filterFn: any) {
       onChangeRowsPerPage={handleChangeRowsPerPage}
     />
   );
+
+  // useEffect(() => {
+  //   console.log(filterFn);
+  // });
 
   const tasksAfterPaging = () => {
     return filterFn
